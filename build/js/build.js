@@ -18,6 +18,7 @@ var bootstrap = require('bootstrap');
 require('./modules/main');
 require('./modules/counts');
 require('./services');
+require('./modules/auth');
 
 app.config(function($stateProvider, $urlRouterProvider) {
     //
@@ -30,6 +31,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             ulr: '/',
             templateUrl: 'layout/main.html',
             controller: 'MainCtrl'
+        })
+        .state('main.login', {
+            url: '/login',
+            templateUrl: '/layout/auth.login.html',
+            controller: 'login'
         })
         .state('main.state1', {
             url: "/state1",
@@ -67,7 +73,39 @@ app.run(function($rootScope, $state) {
 });
 
 module.exports = app;
-},{"./modules/counts":3,"./modules/main":4,"./services":7,"angular":12,"angular-resource":9,"angular-ui-router":10,"bootstrap":13,"jquery":26}],2:[function(require,module,exports){
+},{"./modules/auth":2,"./modules/counts":6,"./modules/main":7,"./services":11,"angular":16,"angular-resource":13,"angular-ui-router":14,"bootstrap":17,"jquery":30}],2:[function(require,module,exports){
+/**
+ * Created by sergey on 11.03.15.
+ */
+
+var app = require('angular').module('app');
+
+app.controller('login', require('./login'));
+app.controller('registration', require('./registration'));
+},{"./login":3,"./registration":4,"angular":16}],3:[function(require,module,exports){
+/**
+ * Created by sergey on 11.03.15.
+ */
+
+var api = require('../../services/api');
+
+module.exports = function($scope) {
+    console.log(123123);
+
+    $scope.send = function() {
+        api.findUser('admin');
+        //api.login('admin', '123');
+    }
+};
+},{"../../services/api":9}],4:[function(require,module,exports){
+/**
+ * Created by sergey on 11.03.15.
+ */
+
+module.exports = function($scope) {
+
+}
+},{}],5:[function(require,module,exports){
 /**
  * Created by sergey on 10.03.15.
  */
@@ -78,7 +116,7 @@ module.exports = function($scope, api) {
     console.log(123, api);
 //    234
 };
-},{}],3:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /**
  * Created by sergey on 10.03.15.
  */
@@ -88,7 +126,7 @@ module.exports = function($scope, api) {
 var app = require('angular').module('app');
 
 app.controller('EditTodoCtrl', require('./controller'));
-},{"./controller":2,"angular":12}],4:[function(require,module,exports){
+},{"./controller":5,"angular":16}],7:[function(require,module,exports){
 /**
  * Created by sergey on 11.03.15.
  */
@@ -98,7 +136,7 @@ app.controller('EditTodoCtrl', require('./controller'));
 var app = require('angular').module('app');
 
 app.controller('MainCtrl', require('./main'));
-},{"./main":5,"angular":12}],5:[function(require,module,exports){
+},{"./main":8,"angular":16}],8:[function(require,module,exports){
 /**
  * Created by sergey on 11.03.15.
  */
@@ -106,18 +144,198 @@ app.controller('MainCtrl', require('./main'));
 module.exports = function($scope) {
     $scope.a = ' hello World !!!';
 };
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
+/**
+ * Created by sergey on 13.03.15.
+ */
+
+function ajax(params) {
+    $.ajax({
+        url: params.url,
+        type: params.type,
+        data: JSON.stringify(params.data),
+        dataType: 'json',
+        contentType: 'application/json',
+        headers: {
+            Accept: "application/json, text/javascript, */*",
+            "X-Requested-With": "XMLHttpRequest"
+        },
+        xhrFields: {
+            withCredentials: false
+        },
+        success: function(res) {
+            console.log('success', res);
+        },
+        error: function(err) {
+            console.log('error', err)
+
+        }
+    })
+}
+
+var params = {
+    url: "",
+    type: "GET",
+    data: {}
+};
+
+module.exports = {
+    login: function(userName, password) {
+        params.url = 'http://127.0.0.1:3000/users/login';
+        params.type = "POST";
+        params.data = {userName: userName, password: password};
+        ajax(params);
+    },
+    logout: function() {
+        params.url = 'http://127.0.0.1:3000/users/logout';
+        params.type = "POST";
+        ajax(params);
+    },
+    getFirms: function(id) {
+
+    },
+    createFirm: function(values) {
+
+    },
+    updateFirm: function(id) {
+
+    },
+    shareFirm: function(userName) {
+
+    },
+    excludeFirm: function(userName) {
+
+    },
+    deleteFirm: function(id) {
+
+    },
+    getUsers: function(id) {
+        params.url = 'http://127.0.0.1:3000/users' + id ? id : '';
+        ajax(params);
+    },
+    findUser: function(userName) {
+        params.url = 'http://127.0.0.1:3000/users/find';
+        params.data = userName;
+        ajax(params);
+    },
+    createUser: function(values) {
+
+    },
+    updateUser: function(id) {
+
+    },
+    deleteUser: function(id) {
+
+    },
+    getCounts: function() {
+
+    },
+    createCount: function() {
+
+    },
+    updateCount: function() {
+
+    },
+    deleteCount: function() {
+
+    }
+};
+},{}],10:[function(require,module,exports){
 /**
  * Created by sergey on 11.03.15.
  */
 
+
 module.exports = function($resource) {
 console.log('init resource');
+
+    function ajax(url, type, data) {
+        $.ajax({
+            url: "http://127.0.0.1:3000/users/login",
+            type:'POST',
+            data: JSON.stringify({userName: 'admin', password: '123'}),
+            dataType: 'json',
+            //crossDomain: true,
+            contentType: 'application/json',
+            headers: {
+                Accept: "application/json, text/javascript, */*",
+                "X-Requested-With": "XMLHttpRequest"
+                // Set any custom headers here.
+                // If you set any non-simple headers, your server must include these
+                // headers in the 'Access-Control-Allow-Headers' response header.
+            },
+            xhrFields: {
+                // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
+                // This can be used to set the 'withCredentials' property.
+                // Set the value to 'true' if you'd like to pass cookies to the server.
+                // If this is enabled, your server must respond with the header
+                // 'Access-Control-Allow-Credentials: true'.
+                withCredentials: false
+            },
+            success: function(res) {
+                console.log('success', res);
+            },
+            error: function(err) {
+                console.log('error', err)
+
+            }
+        })
+    }
+
+    function createCORSRequest(method, url) {
+        var xhr = new XMLHttpRequest();
+        if ("withCredentials" in xhr) {
+
+            // Check if the XMLHttpRequest object has a "withCredentials" property.
+            // "withCredentials" only exists on XMLHTTPRequest2 objects.
+            xhr.open(method, url, true);
+
+        } else if (typeof XDomainRequest != "undefined") {
+
+            // Otherwise, check if XDomainRequest.
+            // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+            xhr = new XDomainRequest();
+            xhr.open(method, url);
+
+        } else {
+
+            // Otherwise, CORS is not supported by the browser.
+            xhr = null;
+
+        }
+        return xhr;
+    }
+
+
+
     return {
-        a: function() {return 1}
+        login: function() {
+            ajax();
+            return
+            var xhr = createCORSRequest('POST', "http://127.0.0.1:3000/users/login/");
+            if (!xhr) {
+                throw new Error('CORS not supported');
+            }
+            function getTitle(text) {
+                return text.match('<title>(.*)?</title>')[1];
+            }
+
+            xhr.onload = function() {
+                var text = xhr.responseText;
+                var title = getTitle(text);
+                alert('Response from CORS request to ' + url + ': ' + title);
+            };
+
+            xhr.onerror = function() {
+                alert('Woops, there was an error making the request.');
+            };
+
+            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+            xhr.send({password: '123', 'username': 'admin'});
+        }
     }
 };
-},{}],7:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /**
  * Created by sergey on 11.03.15.
  */
@@ -127,7 +345,7 @@ console.log('init resource');
 var app = require('angular').module('app');
 
 app.service('api', require('./http'));
-},{"./http":6,"angular":12}],8:[function(require,module,exports){
+},{"./http":10,"angular":16}],12:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.14
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -797,11 +1015,11 @@ angular.module('ngResource', ['ng']).
 
 })(window, window.angular);
 
-},{}],9:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 require('./angular-resource');
 module.exports = 'ngResource';
 
-},{"./angular-resource":8}],10:[function(require,module,exports){
+},{"./angular-resource":12}],14:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.13
@@ -5034,7 +5252,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],11:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /**
  * @license AngularJS v1.3.14
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -31216,11 +31434,11 @@ var minlengthDirective = function() {
 })(window, document);
 
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}</style>');
-},{}],12:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":11}],13:[function(require,module,exports){
+},{"./angular":15}],17:[function(require,module,exports){
 // This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
 require('../../js/transition.js')
 require('../../js/alert.js')
@@ -31234,7 +31452,7 @@ require('../../js/popover.js')
 require('../../js/scrollspy.js')
 require('../../js/tab.js')
 require('../../js/affix.js')
-},{"../../js/affix.js":14,"../../js/alert.js":15,"../../js/button.js":16,"../../js/carousel.js":17,"../../js/collapse.js":18,"../../js/dropdown.js":19,"../../js/modal.js":20,"../../js/popover.js":21,"../../js/scrollspy.js":22,"../../js/tab.js":23,"../../js/tooltip.js":24,"../../js/transition.js":25}],14:[function(require,module,exports){
+},{"../../js/affix.js":18,"../../js/alert.js":19,"../../js/button.js":20,"../../js/carousel.js":21,"../../js/collapse.js":22,"../../js/dropdown.js":23,"../../js/modal.js":24,"../../js/popover.js":25,"../../js/scrollspy.js":26,"../../js/tab.js":27,"../../js/tooltip.js":28,"../../js/transition.js":29}],18:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: affix.js v3.3.2
  * http://getbootstrap.com/javascript/#affix
@@ -31398,7 +31616,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],15:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: alert.js v3.3.2
  * http://getbootstrap.com/javascript/#alerts
@@ -31494,7 +31712,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],16:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: button.js v3.3.2
  * http://getbootstrap.com/javascript/#buttons
@@ -31612,7 +31830,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],17:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: carousel.js v3.3.2
  * http://getbootstrap.com/javascript/#carousel
@@ -31851,7 +32069,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],18:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: collapse.js v3.3.2
  * http://getbootstrap.com/javascript/#collapse
@@ -32064,7 +32282,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],19:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: dropdown.js v3.3.2
  * http://getbootstrap.com/javascript/#dropdowns
@@ -32227,7 +32445,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],20:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: modal.js v3.3.2
  * http://getbootstrap.com/javascript/#modals
@@ -32553,7 +32771,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],21:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: popover.js v3.3.2
  * http://getbootstrap.com/javascript/#popovers
@@ -32668,7 +32886,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],22:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.3.2
  * http://getbootstrap.com/javascript/#scrollspy
@@ -32845,7 +33063,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],23:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: tab.js v3.3.2
  * http://getbootstrap.com/javascript/#tabs
@@ -33000,7 +33218,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],24:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.2
  * http://getbootstrap.com/javascript/#tooltip
@@ -33474,7 +33692,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],25:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 /* ========================================================================
  * Bootstrap: transition.js v3.3.2
  * http://getbootstrap.com/javascript/#transitions
@@ -33535,7 +33753,7 @@ require('../../js/affix.js')
 
 }(jQuery);
 
-},{}],26:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.3
  * http://jquery.com/

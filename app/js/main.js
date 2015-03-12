@@ -17,6 +17,7 @@ var bootstrap = require('bootstrap');
 require('./modules/main');
 require('./modules/counts');
 require('./services');
+require('./modules/auth');
 
 app.config(function($stateProvider, $urlRouterProvider) {
     //
@@ -29,6 +30,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             ulr: '/',
             templateUrl: 'layout/main.html',
             controller: 'MainCtrl'
+        })
+        .state('main.login', {
+            url: '/login',
+            templateUrl: '/layout/auth.login.html',
+            controller: 'login'
         })
         .state('main.state1', {
             url: "/state1",

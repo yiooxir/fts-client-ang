@@ -1,0 +1,37 @@
+<div ui-view="" class="ng-scope"><div class="row ng-scope">
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <h1 class="text-center login-title"> login page </h1>
+        <div class="account-wall">
+            <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+
+
+
+            <!-- view for login -->
+
+            <!-- ngIf: !isLoggedIn(); -->
+            <form class="form-signin ng-scope ng-pristine ng-invalid ng-invalid-required">
+            <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Email" required="" ng-model="user.userName" autocomplete="off" style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDiUQsh1pnwAAAdhJREFUOMvNks1rU1EQxX9z37OJGAUF4yfYQBTUlCpBixhRaBcuAoIiiovsFBXXQQk3IYkkf4IF8S/QUjdCURELdlWjglSKunHhIukiQktLX/IYF0mkTRP8WDm7M/dyZuacA/9dpdPp/dbaEx1srR2x1g71+2/WAmvtnWAwOC8ijwABREQeiMj7bDZb6kXgdmFPRLYAQ9baK6raFJHjAKr6pReBdONsNjstImeAz6rqi8hh4FU+nx/tS5DJZA4YY7Y1Go0V13UHjTFTIuK0J/vAJVWtiUio2WwulEqlD+tOcF33LnAzEAhsnNAieirSWtZ13YfAjW4Rzb+6Jm3146q6U1V/iEjYcZxJwHSm/pZgbeVyuRfAmKp+NMb88v9g4gLnYntYXZhnauI1tT45uAqMtWGx0w8nUlwbPYazvMy+2FluXU/0DhJwCGiq6lyhUHjSaoU4dTICi1+ZfTvHbKXC9LvvDPQiKBaLBc/zhn3fvw1oq7uJkAtsjZK8mOR0PM7w4A68PkmkXC5/2qCUA1RnyI+/ZCR1j/Oxo4QnKtT+zL4636oe7IoQjxwhunsAVlZp/I3/byafU/X3kkxdJrp5kZnHz6j3O6H3EhXG71cIbQ+xVF9a9/QTGr2YJMqy6kMAAAAASUVORK5CYII=); background-attachment: scroll; background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
+            <input type="password" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Password" required="" ng-model="user.password" autocomplete="off" style="background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QsPDiUQsh1pnwAAAdhJREFUOMvNks1rU1EQxX9z37OJGAUF4yfYQBTUlCpBixhRaBcuAoIiiovsFBXXQQk3IYkkf4IF8S/QUjdCURELdlWjglSKunHhIukiQktLX/IYF0mkTRP8WDm7M/dyZuacA/9dpdPp/dbaEx1srR2x1g71+2/WAmvtnWAwOC8ijwABREQeiMj7bDZb6kXgdmFPRLYAQ9baK6raFJHjAKr6pReBdONsNjstImeAz6rqi8hh4FU+nx/tS5DJZA4YY7Y1Go0V13UHjTFTIuK0J/vAJVWtiUio2WwulEqlD+tOcF33LnAzEAhsnNAieirSWtZ13YfAjW4Rzb+6Jm3146q6U1V/iEjYcZxJwHSm/pZgbeVyuRfAmKp+NMb88v9g4gLnYntYXZhnauI1tT45uAqMtWGx0w8nUlwbPYazvMy+2FluXU/0DhJwCGiq6lyhUHjSaoU4dTICi1+ZfTvHbKXC9LvvDPQiKBaLBc/zhn3fvw1oq7uJkAtsjZK8mOR0PM7w4A68PkmkXC5/2qCUA1RnyI+/ZCR1j/Oxo4QnKtT+zL4636oe7IoQjxwhunsAVlZp/I3/byafU/X3kkxdJrp5kZnHz6j3O6H3EhXG71cIbQ+xVF9a9/QTGr2YJMqy6kMAAAAASUVORK5CYII=); background-attachment: scroll; cursor: auto; background-position: 100% 50%; background-repeat: no-repeat no-repeat;">
+
+            <p class="text-center text-danger ng-binding ng-hide" ng-show="!!user.error"> </p>
+            <button class="btn btn-lg btn-primary btn-block" style="margin: 10px 0" ng-click="send()">
+                Sign in
+            </button>
+            <label class="checkbox pull-left">
+                <input type="checkbox" value="remember-me">
+                Remember me
+            </label>
+            <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+        </form><!-- end ngIf: !isLoggedIn(); -->
+
+
+
+            <!-- view for logged in -->
+
+            <!-- ngIf: isLoggedIn() -->
+        </div>
+
+
+        <!--<a href="#" class="text-center new-account">Create an account </a>-->
+    </div>
+</div></div>

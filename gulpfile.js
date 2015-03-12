@@ -35,6 +35,7 @@ gulp.task('connect', function () {
     connect.server({
         root       : 'build',
         port       : port,
+        headers : {'cross-origin':'*'},
         livereload : true
     });
 });
