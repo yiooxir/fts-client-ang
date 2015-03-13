@@ -18,6 +18,7 @@ require('./modules/main');
 require('./modules/counts');
 require('./services');
 require('./modules/auth');
+require('./modules/test');
 
 app.config(function($stateProvider, $urlRouterProvider) {
     //
@@ -48,17 +49,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         //        $scope.items = ["A", "List", "Of", "Items"];
         //    }
         //})
-        .state('state2', {
-            url: "/state2",
-            templateUrl: "layout/state2.html"
+        .state('test', {
+            url: '/test',
+            templateUrl: '/layout/test.html',
+            controller: 'test'
         })
-        .state('state2.list', {
-            url: "/list",
-            templateUrl: "partials/state2.list.html",
-            controller: function($scope) {
-                $scope.things = ["A", "Set", "Of", "Things"];
-            }
-        });
 });
 
 app.run(function($rootScope, $state) {

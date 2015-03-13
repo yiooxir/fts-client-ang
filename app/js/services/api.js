@@ -72,7 +72,10 @@ module.exports = {
         ajax(params);
     },
     createUser: function(values) {
-
+        params.url = 'http://127.0.0.1:3000/users/create';
+        params.type = "POST";
+        params.data = values;
+        ajax(params);
     },
     updateUser: function(id) {
 

@@ -66,6 +66,6 @@ gulp.task('watch', function () {
 });
 
 
-gulp.task('build', ['browserify']);
+gulp.task('build', ['browserify', 'js', 'html', 'css']);
 gulp.task('develop', ['build', 'connect', 'open', 'watch']);
 gulp.task('default', ['build']);
