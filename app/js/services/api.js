@@ -2,11 +2,14 @@
  * Created by sergey on 13.03.15.
  */
 
+var q = require('q');
+
 function ajax(params) {
+    var def = q.defer();
     $.ajax({
         url: params.url,
         type: params.type,
-        data: JSON.stringify(params.data),
+        data: params.type == "GET" ? params.data : JSON.stringify(params.data),
         dataType: 'json',
         contentType: 'application/json',
         headers: {
@@ -18,12 +21,16 @@ function ajax(params) {
         },
         success: function(res) {
             console.log('success', res);
+            def.resolve(res);
         },
         error: function(err) {
-            console.log('error', err)
+            console.log('error', err);
+            def.reject(err);
 
         }
-    })
+    });
+
+    return def.promise;
 }
 
 var params = {
@@ -32,17 +39,31 @@ var params = {
     data: {}
 };
 
+function Req(path, type, data) {
+    this.type = type || "GET";
+    this.data = data || {};
+    this.host = "";
+    this.url = this.host + path;
+}
+
+Req.prototype = {
+    send: function() {
+        return ajax({
+            url: this.url,
+            data: this.data,
+            type: this.type
+        })
+    }
+};
+
 module.exports = {
     login: function(userName, password) {
-        params.url = 'http://127.0.0.1:3000/users/login';
-        params.type = "POST";
-        params.data = {userName: userName, password: password};
-        ajax(params);
+        var req = new Req('/users/login', "POST", {userName: userName, password: password});
+        return req.send();
     },
     logout: function() {
-        params.url = 'http://127.0.0.1:3000/users/logout';
-        params.type = "POST";
-        ajax(params);
+        var req = new Req('/users/logout', "POST");
+        return req.send();
     },
     getFirms: function(id) {
 
@@ -62,9 +83,13 @@ module.exports = {
     deleteFirm: function(id) {
 
     },
+    getMe: function(){
+        var req = new Req('/users/me');
+        return req.send();
+    },
     getUsers: function(id) {
-        params.url = 'http://127.0.0.1:3000/users' + id ? id : '';
-        ajax(params);
+        var req = new Req('/users');
+        req.send();
     },
     findUser: function(userName) {
         params.url = 'http://127.0.0.1:3000/users/find';
@@ -72,10 +97,8 @@ module.exports = {
         ajax(params);
     },
     createUser: function(values) {
-        params.url = 'http://127.0.0.1:3000/users/create';
-        params.type = "POST";
-        params.data = values;
-        ajax(params);
+        var req = new Req('/users/create', "POST", values);
+        req.send();
     },
     updateUser: function(id) {
 

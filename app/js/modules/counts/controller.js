@@ -4,7 +4,5 @@
 
 module.exports = function($scope, api) {
 
-    $scope.a = ' hello World !!!';
-    console.log(123, api);
-//    234
+    console.info('count controller is started');
 };

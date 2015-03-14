@@ -3,5 +3,5 @@
  */
 
 module.exports = function($scope) {
-    $scope.a = ' hello World !!!';
+    console.info('main controller is started');
 };
