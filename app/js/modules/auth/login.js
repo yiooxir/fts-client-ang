@@ -4,11 +4,23 @@
 
 var api = require('../../services/api');
 
-module.exports = function($scope) {
-    console.log(123123);
+module.exports = function($rootScope, $scope, $state, $timeout) {
 
-    $scope.send = function() {
-        api.findUser('admin');
-        //api.login('admin', '123');
+    $scope.userName = "";
+    $scope.password = "";
+
+
+
+    $scope.login = function() {
+        api.login($scope.userName, $scope.password)
+            .then(function(user) {
+                $timeout(function(){
+                    var state = user.isSuperUser ? 'main.admin.users' : 'main.counts';
+                    $state.go(state);
+                }, 0)
+            })
+            .catch(function(err) {
+                console.error(err)
+            })
     }
 };

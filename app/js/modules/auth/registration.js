@@ -4,4 +4,5 @@
 
 module.exports = function($scope) {
 
-}
+    console.info('registration controller is start');
+};

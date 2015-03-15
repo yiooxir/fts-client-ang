@@ -20,11 +20,9 @@ function ajax(params) {
             withCredentials: false
         },
         success: function(res) {
-            console.log('success', res);
             def.resolve(res);
         },
         error: function(err) {
-            console.log('error', err);
             def.reject(err);
 
         }
@@ -66,10 +64,13 @@ module.exports = {
         return req.send();
     },
     getFirms: function(id) {
-
+        var req = new Req('/firms');
+        return req.send();
     },
     createFirm: function(values) {
+        var req = new Req('/firms/create', "POST", values);
 
+        return req.send();
     },
     updateFirm: function(id) {
 
@@ -89,16 +90,16 @@ module.exports = {
     },
     getUsers: function(id) {
         var req = new Req('/users');
-        req.send();
+        return req.send();
     },
     findUser: function(userName) {
         params.url = 'http://127.0.0.1:3000/users/find';
         params.data = userName;
         ajax(params);
     },
-    createUser: function(values) {
-        var req = new Req('/users/create', "POST", values);
-        req.send();
+    createUser: function(userName, password) {
+        var req = new Req('/users/create', "POST", {userName: userName, password: password});
+        return req.send();
     },
     updateUser: function(id) {
 

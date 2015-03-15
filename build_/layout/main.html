@@ -1,0 +1,47 @@
+<!--suppress HtmlUnknownAttribute -->
+<div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">FTS system </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" ng-if="!isSuperUser()">Фирмы <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="" ui-sref="main.admin.users" ng-if="isSuperUser()">Администрирование</a></li>
+                    <li><a href="#contact">О программе</a></li>
+                </ul>
+
+                <!--<ul class="nav navbar-nav navbar-right">-->
+                    <!--<li><a href="#about" ng-if="getUserName()">Администрирование</a></li>-->
+                    <!--<li><a href="#contact">О программе</a></li>-->
+                <!--</ul>-->
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-text"> <span class="text-info">{{getUserName()}}</span> </li>
+                    <li><a href="" ng-click="logout()">выход</a></li>
+                </ul>
+            </div>
+            <div></div>
+        </div>
+    </nav>
+    <div class="container" style="margin-top: 51px;" ui-view>
+        <!--<div class="row">-->
+            <!--<h1>Фирма: ООО "Рога и копыта"</h1>-->
+        <!--</div>-->
+    </div>
+
+</div>

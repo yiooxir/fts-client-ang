@@ -6,20 +6,15 @@ var app = require('angular').module('app');
 
 var api = require('../../services/api');
 
-module.exports = app.controller('test', function($scope, $timeout) {
+module.exports = app.controller('test', function($rootScope, $scope, $timeout) {
 
-    $scope.currentUser = '';
-
-    api.getMe()
-        .then(function(res) {
-            $timeout(function() {$scope.currentUser = res.username});
-        });
-    $scope.login = function() {
-        api.login($scope.userName, $scope.password);
-    };
+    $scope.userName = $rootScope.locals.getUserName();
 
     $scope.logout = function() {
-        api.logout();
+        api.logout()
+            .then(function() {
+                //$state.go('main.login');
+            })
     };
 
     $scope.getUsers = function() {
@@ -28,6 +23,10 @@ module.exports = app.controller('test', function($scope, $timeout) {
     $scope.createUser = function() {
 
         api.createUser({userName: $scope.userName, password: $scope.password})
+    };
+
+    $scope.createFirm = function() {
+
     }
 
 });

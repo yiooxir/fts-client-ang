@@ -6,4 +6,4 @@
 
 var app = require('angular').module('app');
 
-app.controller('EditTodoCtrl', require('./controller'));
+app.controller('userCounts', require('./controller'));

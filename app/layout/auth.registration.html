@@ -8,13 +8,14 @@
 
                 <input type="text" ng-model="userName" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Email" required="" >
                 <input type="password" ng-model="password" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Password" required="" >
+                <input type="password" ng-model="checkPassword " class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="check password" required="" >
 
                 <p class="text-center text-danger"> имя пользователя или пароль не верны ... </p>
                 <button class="btn btn-lg btn-primary btn-block" ng-click="login()" style="margin: 10px 0">
                     Sign in
                 </button>
                 <a href=""> напомнить пароль </a>
-                <a href="#" class="pull-right need-help" ui-sref="main.registration">регистрация </a><span class="clearfix"></span>
+                <a href="" class="pull-right need-help" ui-sref="main.login">авторизация </a><span class="clearfix"></span>
             </form>
         </div>
     </div>
