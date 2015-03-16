@@ -22,6 +22,10 @@
 
 </div>
 
+<div class="row">
+    <remove-filter></remove-filter>
+</div>
+
 <table class="table table-condensed">
     <tr>
         <th>#</th>
@@ -29,10 +33,17 @@
         <th>Дата создания</th>
         <th>Управление</th>
     </tr>
-    <tr ng-repeat="firm in firms| orderBy : '-created'">
+    <tr ng-repeat="firm in filtered()| orderBy : '-created'">
         <td>{{$index}}</td>
         <td>{{firm.name}}</td>
         <td>{{firm.created|date : 'dd.MM.yyyy'}}</td>
-        <td>{{firm.name}}</td>
+        <td>
+            <a href="" title="смотреть записи по данной фирме"
+               ng-click="filters.firm = firm"
+               ui-sref="main.admin.records"><i class="fa fa-book"></i></a>
+            <a href="" title="смотреть пользователей привязанных к фирме"
+               ng-click="filters.firm = firm"
+               ui-sref="main.admin.users"><i class="fa fa-users"></i></a>
+        </td>
     </tr>
 </table>

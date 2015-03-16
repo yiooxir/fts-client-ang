@@ -9,6 +9,8 @@ module.exports = function($scope, users, $state) {
 
     $scope.creating = false;
 
+    $scope.filters = $scope.$parent.filters;
+
     $scope.createUser = function() {
         if (!$scope.userName || !$scope.password) {
             alert('Имя пользователя и пароль должны быть заполнены');

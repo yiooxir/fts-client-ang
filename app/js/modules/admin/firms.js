@@ -6,7 +6,19 @@ var api = require('../../services/api');
 module.exports = function($scope, $state) {
     $scope.firms = $scope.$parent.firms;
 
+    $scope.users = $scope.$parent.users;
+
     $scope.creating = false;
+
+    $scope.filters = $scope.$parent.filters;
+
+    $scope.filtered = function() {
+        if (!$scope.filters.user) return $scope.firms;
+
+        return _.filter($scope.firms, function(firm) {
+            return $scope.filters.user.firms.indexOf(firm._id) != -1;
+        })
+    };
 
     $scope.create = function() {
         if (!$scope.name) {

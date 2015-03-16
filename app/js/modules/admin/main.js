@@ -3,4 +3,9 @@
  */
 
 
-module.exports = function($scope, $state) {};
+module.exports = function($scope, $state) {
+    $scope.filters = {
+        firm: null,
+        user: null
+    }
+};

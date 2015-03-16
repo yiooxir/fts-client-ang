@@ -26,6 +26,10 @@
 </div>
 
 <div class="row">
+    <remove-filter></remove-filter>
+</div>
+
+<div class="row">
     <table class="table table-condensed">
         <tr>
             <th>#</th>
@@ -37,7 +41,17 @@
             <td>{{$index}}</td>
             <td>{{user.username}}</td>
             <td>{{user.created|date : 'dd.MM.yyyy'}}</td>
-            <td>{{user.name}}</td>
+            <td class="management">
+                <a href="" title="Смотреть фирмы пользователя"
+                   ng-click="filters.user = user"
+                        ui-sref="main.admin.firms({userId: user._id})">
+                    <i class="fa fa-building-o"></i>
+                </a>
+                <a href="" title="Смотреть данные пользователя"
+                   ng-click="filters.user = user"
+                   ui-sref="main.admin.records({userId: user._id})"><i class="fa fa-book"></i></a>
+
+            </td>
         </tr>
     </table>
 </div>

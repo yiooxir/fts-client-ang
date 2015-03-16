@@ -11,3 +11,10 @@
     -webkit-border-radius: 50%;
     border-radius: 50%;
 }
+
+.management a {
+    margin: 0 5px;
+}
+.delete-filter a:hover{
+    text-decoration: line-through;
+}

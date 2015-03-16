@@ -1,1 +1,38 @@
-<div>admin firms</div>
+<div class="row" style="margin: 10px">
+    <div class="col-md-3" >
+        <div class="input-group">
+            <span class="input-group-addon">поиск</span>
+            <input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
+        </div>
+    </div>
+
+    <!--<div class="col-md-3" ng-show="!creating">-->
+        <!--<button type="button" class="btn btn-default" ng-click="creating = true" > Добавить фирму </button>-->
+    <!--</div>-->
+
+    <!--<div ng-show="creating">-->
+        <!--<div class="col-md-3">-->
+            <!--<input type="text" class="form-control" placeholder="название фирмы" ng-model="name">-->
+        <!--</div>-->
+
+        <!--<button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="creating = false"> отмена </button>-->
+        <!--<button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="create()"> сохранить </button>-->
+
+    <!--</div>-->
+
+</div>
+
+<table class="table table-condensed">
+    <tr>
+        <th>#</th>
+        <th>Название</th>
+        <th>Дата создания</th>
+        <th>Управление</th>
+    </tr>
+    <tr ng-repeat="count in counts | orderBy : '-created' | fltRecByUser:filters.user">
+        <td>{{$index}}</td>
+        <td>{{count.num}}</td>
+        <td>{{count.created|date : 'dd.MM.yyyy'}}</td>
+        <td>{{count.sysNumber}}</td>
+    </tr>
+</table>

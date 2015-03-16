@@ -11,8 +11,14 @@ module.exports = {
                 console.error(err);
             })
     },
-    counts: function($rootScope) {
+    counts: function() {
         return api.getCounts()
+            .catch(function(err) {
+                console.error(err);
+            })
+    },
+    users: function() {
+        return api.getUsers()
             .catch(function(err) {
                 console.error(err);
             })

@@ -1,0 +1,9 @@
+<p class="delete-filter" ng-show="!!filters.user || !!filters.firm">убрать фильтры:
+    <span ng-show="!!filters.user">
+        <a href="" ng-click="filters.user=null">пользователь: <span class="text-danger">{{filters.user.username}}</span></a>
+    </span>
+    <span style="margin-left: 20px;"></span>
+    <span ng-show="!!filters.firm">
+        <a href="" ng-click="filters.firm=null">фирма: <span class="text-danger">{{filters.firm.name}}</span></a>
+    </span>
+</p>
