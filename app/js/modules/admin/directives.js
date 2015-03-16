@@ -7,9 +7,7 @@ module.exports = {
         return {
             restrict: 'E',
             templateUrl: '/layout/admin.directives.removeFilters.html',
-            link: function($scope) {
-                console.log('>>', $scope.filters);
-            }
+            link: function($scope) {}
         }
     }
 };

@@ -123,7 +123,7 @@ app.run(function($rootScope, $state, $timeout) {
                 //console.error(err);
                 $timeout(function() {
                     locals.user = null;
-                    $state.go('main.login');
+                    $state.go('login');
                 });
             });
     })

@@ -10,12 +10,22 @@ module.exports = {
         }
     },
     fltRecByFirm: function() {
+        return function(data, firm) {
+            if (!firm) return data;
 
+            return _.where(data, {firm: firm._id});
+        }
     },
     fltFirmsByUser: function() {
 
     },
     fltUsersByFirm: function() {
+        return function(users, firm) {
+            if (!firm) return users;
 
+            return _.filter(users, function(user) {
+                return user.firms.indexOf(firm._id) != -1;
+            })
+        }
     }
 };

@@ -16,7 +16,7 @@ module.exports = function($scope, $stateParams, $state) {
     $scope.updating = false;
 
     $scope.create = function() {
-        api.createCount({num: $scope.num})
+        api.createCount({num: $scope.num, firm: $scope.firm._id})
             .then(function() {
                 $state.go($state.current, {}, {reload: true})
             })

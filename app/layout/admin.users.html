@@ -30,21 +30,24 @@
 </div>
 
 <div class="row">
-    <table class="table table-condensed">
+    <table class="table table-hover">
+        <thead>
         <tr>
             <th>#</th>
             <th>Имя</th>
             <th>Дата создания</th>
             <th>Управление</th>
         </tr>
-        <tr ng-repeat="user in users | orderBy : '-created'">
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in users | orderBy : '-created' | fltUsersByFirm : filters.firm">
             <td>{{$index}}</td>
             <td>{{user.username}}</td>
             <td>{{user.created|date : 'dd.MM.yyyy'}}</td>
             <td class="management">
                 <a href="" title="Смотреть фирмы пользователя"
                    ng-click="filters.user = user"
-                        ui-sref="main.admin.firms({userId: user._id})">
+                   ui-sref="main.admin.firms({userId: user._id})">
                     <i class="fa fa-building-o"></i>
                 </a>
                 <a href="" title="Смотреть данные пользователя"
@@ -53,5 +56,7 @@
 
             </td>
         </tr>
+        </tbody>
+
     </table>
 </div>

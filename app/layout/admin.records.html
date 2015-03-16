@@ -22,16 +22,24 @@
 
 </div>
 
-<table class="table table-condensed">
+<div class="row">
+    <remove-filter></remove-filter>
+</div>
+
+<table class="table table-hover">
     <tr>
         <th>#</th>
-        <th>Название</th>
+        <th>Номер оферты</th>
+        <th>Пользователь</th>
+        <th>Фирма</th>
         <th>Дата создания</th>
         <th>Управление</th>
     </tr>
-    <tr ng-repeat="count in counts | orderBy : '-created' | fltRecByUser:filters.user">
+    <tr ng-repeat="count in counts | orderBy : '-created' | fltRecByUser:filters.user | fltRecByFirm: filters.firm">
         <td>{{$index}}</td>
         <td>{{count.num}}</td>
+        <td>{{getUser(count).username}}</td>
+        <td>{{getFirm(count).name}}</td>
         <td>{{count.created|date : 'dd.MM.yyyy'}}</td>
         <td>{{count.sysNumber}}</td>
     </tr>
