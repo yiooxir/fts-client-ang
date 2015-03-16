@@ -108,13 +108,17 @@ module.exports = {
 
     },
     getCounts: function() {
+        var req = new Req('/counts');
+        return req.send();
 
     },
-    createCount: function() {
-
+    createCount: function(value) {
+        var req = new Req('/counts/create', "POST", value);
+        return req.send();
     },
-    updateCount: function() {
-
+    updateCount: function(id, value) {
+        var req = new Req('/counts/' + id, "PUT", value);
+        return req.send();
     },
     deleteCount: function() {
 

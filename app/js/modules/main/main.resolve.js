@@ -12,6 +12,9 @@ module.exports = {
             })
     },
     counts: function($rootScope) {
-        return [1,2,3]
+        return api.getCounts()
+            .catch(function(err) {
+                console.error(err);
+            })
     }
 };
