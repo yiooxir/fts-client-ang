@@ -16,7 +16,7 @@ module.exports = function($rootScope, $scope, $state, $timeout) {
             .then(function(user) {
                 $timeout(function(){
                     var state = user.isSuperUser ? 'main.admin.users' : 'main.counts';
-                    $state.go(state);
+                    $state.go(state, {}, {reload: true});
                 }, 0)
             })
             .catch(function(err) {

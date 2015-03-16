@@ -14,7 +14,7 @@ module.exports = function($scope, $rootScope, firms, counts, $state) {
     $scope.logout = function() {
         api.logout()
             .then(function() {
-                $state.go('main.login');
+                $state.go('login');
             })
     }
 };

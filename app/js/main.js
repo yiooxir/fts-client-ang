@@ -39,7 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
 
         /* auth  */
-        .state('main.login', {
+        .state('login', {
             url: '/login',
             templateUrl: '/layout/auth.login.html',
             controller: 'login'
@@ -120,7 +120,7 @@ app.run(function($rootScope, $state, $timeout) {
                 $timeout(function() {locals.user = res});
             })
             .catch(function(err) {
-                console.error(err);
+                //console.error(err);
                 $timeout(function() {
                     locals.user = null;
                     $state.go('main.login');
