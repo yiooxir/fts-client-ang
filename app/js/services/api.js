@@ -75,12 +75,16 @@ module.exports = {
     updateFirm: function(id) {
 
     },
-    shareFirm: function(userName) {
+    linkToFirm: function(userId, firmId) {
+        var req = new Req('/users/'+userId + '/linkToFirm', "PUT", {firmId: firmId});
+        return req.send();
 
     },
-    excludeFirm: function(userName) {
-
+    excludeFirm: function(userId, firmId) {
+        var req = new Req('/users/'+userId + '/excludeFirm', "PUT", {firmId: firmId});
+        return req.send();
     },
+
     deleteFirm: function(id) {
 
     },

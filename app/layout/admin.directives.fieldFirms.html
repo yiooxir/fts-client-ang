@@ -1,0 +1,22 @@
+<div style="max-width: 400px;">
+    <!--<span class="label label-default">Default</span>-->
+    <div ng-show="!selecting">
+        <span ng-repeat="id in selected" class="delete-filter label label-default" style="margin: 2px 5px" >
+        <a href="" ng-click="remove(id)" style="color: #f5f5f5">{{ getFirm(id).name }}</a>
+
+    </span>
+        <i class="fa fa-plus" ng-click="selecting = true;"></i>
+    </div>
+
+    <span ng-show="selecting" >
+        <select ng-model="sl"  class="form-control input-sm"
+                ng-options="firm as firm.name for firm in firms"
+                ng-click="addFirm(sl)">
+        </select>
+
+<!--<select class="form-control input-sm" ng-click="addFirm(value)" ng-options="firm in firms">-->
+    <!--<option >{{firm.name}}</option>-->
+<!--</select>-->
+    </span>
+</div>
+

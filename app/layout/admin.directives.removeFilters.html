@@ -1,9 +1,13 @@
-<p class="delete-filter" ng-show="!!filters.user || !!filters.firm">убрать фильтры:
+<div class="row text-center" style="background: wheat;">
+    <p class="delete-filter" ng-show="!!filters.user || !!filters.firm" style="line-height: 2">
+        <b>Данные отфильтрованы:</b>
     <span ng-show="!!filters.user">
         <a href="" ng-click="filters.user=null">пользователь: <span class="text-danger">{{filters.user.username}}</span></a>
     </span>
-    <span style="margin-left: 20px;"></span>
+        <span style="margin-left: 20px;"></span>
     <span ng-show="!!filters.firm">
         <a href="" ng-click="filters.firm=null">фирма: <span class="text-danger">{{filters.firm.name}}</span></a>
     </span>
-</p>
+    </p>
+</div>
+

@@ -13,3 +13,4 @@ app.filter('fltRecByFirm', require('./filters').fltRecByFirm);
 app.filter('fltFirmsByUser', require('./filters').fltFirmsByUser);
 app.filter('fltUsersByFirm', require('./filters').fltUsersByFirm);
 app.directive('removeFilter', require('./directives').removeFilter);
+app.directive('fieldFirms', require('./directives').fieldFirms);

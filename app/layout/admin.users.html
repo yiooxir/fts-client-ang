@@ -35,6 +35,7 @@
         <tr>
             <th>#</th>
             <th>Имя</th>
+            <th>Фирма</th>
             <th>Дата создания</th>
             <th>Управление</th>
         </tr>
@@ -43,16 +44,23 @@
         <tr ng-repeat="user in users | orderBy : '-created' | fltUsersByFirm : filters.firm">
             <td>{{$index}}</td>
             <td>{{user.username}}</td>
+            <td><field-firms user="user"></field-firms></td>
             <td>{{user.created|date : 'dd.MM.yyyy'}}</td>
             <td class="management">
-                <a href="" title="Смотреть фирмы пользователя"
-                   ng-click="filters.user = user"
-                   ui-sref="main.admin.firms({userId: user._id})">
-                    <i class="fa fa-building-o"></i>
-                </a>
+                <span>
+                    <a href="" title="Смотреть фирмы пользователя"
+                       ng-click="filters.user = user"
+                       ui-sref="main.admin.firms({userId: user._id})">
+                        <i class="fa fa-building-o"></i>
+                    </a>
                 <a href="" title="Смотреть данные пользователя"
                    ng-click="filters.user = user"
                    ui-sref="main.admin.records({userId: user._id})"><i class="fa fa-book"></i></a>
+                </span>
+                <span>
+
+                </span>
+
 
             </td>
         </tr>
