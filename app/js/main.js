@@ -10,6 +10,7 @@ require('angular-ui-router');
 _ = require('underscore');
 $ = jQuery = require('jquery');
 var bootstrap = require('bootstrap');
+require('../../plugins/datapiker/js/bootstrap-datepicker.min.js');
 
 var app = angular.module('app', ['ui.router']);
 

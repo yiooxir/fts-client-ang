@@ -3,5 +3,10 @@
  */
 
 module.exports = function($timeout, $parse) {
-
+    return {
+        restrict: "E",
+        templateUrl: "",
+        scope: {},
+        link: function($scope) {}
+    }
 };

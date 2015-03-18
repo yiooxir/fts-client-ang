@@ -23,3 +23,17 @@
     cursor: pointer;
     text-decoration: underline;
 }
+.input-group.date > span {
+    cursor: pointer;
+}
+
+.input-group.date > span:hover {
+    opacity: 1;
+}
+
+#sandbox-container {
+    position: absolute;
+    background: white;
+    z-index: 99;
+    border: 1px solid grey;
+}
