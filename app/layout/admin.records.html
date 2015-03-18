@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <div class="row" style="margin: 10px">
     <div class="col-md-3" >
         <div class="input-group">
@@ -5,21 +6,6 @@
             <input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
         </div>
     </div>
-
-    <!--<div class="col-md-3" ng-show="!creating">-->
-        <!--<button type="button" class="btn btn-default" ng-click="creating = true" > Добавить фирму </button>-->
-    <!--</div>-->
-
-    <!--<div ng-show="creating">-->
-        <!--<div class="col-md-3">-->
-            <!--<input type="text" class="form-control" placeholder="название фирмы" ng-model="name">-->
-        <!--</div>-->
-
-        <!--<button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="creating = false"> отмена </button>-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="create()"> сохранить </button>-->
-
-    <!--</div>-->
-
 </div>
 
 <div class="row">
@@ -29,10 +15,10 @@
 <table class="table table-hover">
     <tr>
         <th>#</th>
-        <th>Номер оферты</th>
-        <th>Пользователь</th>
-        <th>Фирма</th>
-        <th>Дата создания</th>
+        <th>№ оферты</th>
+        <th>Дата</th>
+        <th>Сумма</th>
+        <th>Контрагент</th>
         <th>Управление</th>
     </tr>
     <tr ng-repeat="count in counts | orderBy : '-created' | fltRecByUser:filters.user | fltRecByFirm: filters.firm">

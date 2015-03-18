@@ -1,0 +1,7 @@
+<!--suppress HtmlFormInputWithoutLabel -->
+<span class="edit-component">
+    <span ng-show="!editMode" ng-click="editMode = true">{{value}}</span>
+<input  type="text" class="form-control"
+        ng-show="editMode" ng-blur="change()" ng-model="value"
+        ng-keydown="keyHandler($event)"/>
+</span>

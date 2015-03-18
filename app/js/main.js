@@ -3,25 +3,24 @@
  */
 
 var angular = require('angular');
-var router = require('angular-ui-router');
-var resource = require('angular-resource');
 var api = require('./services/api');
 
-
-var app = angular.module('app', ['ui.router', 'ngResource']);
-
-$ = jQuery = require('jquery');
-
+/* plagins */
+require('angular-ui-router');
 _ = require('underscore');
-
+$ = jQuery = require('jquery');
 var bootstrap = require('bootstrap');
 
+var app = angular.module('app', ['ui.router']);
+
+/* angular modules */
 require('./modules/main');
 require('./modules/counts');
 require('./services');
 require('./modules/auth');
 require('./modules/test');
 require('./modules/admin');
+require('./directives');
 
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -114,13 +113,12 @@ app.run(function($rootScope, $state, $timeout) {
     };
 
     /* check auth. middleware */
-    $rootScope.$on('$stateChangeStart', function($event) {
+    $rootScope.$on('$stateChangeStart', function() {
         api.getMe()
             .then(function(res) {
                 $timeout(function() {locals.user = res});
             })
-            .catch(function(err) {
-                //console.error(err);
+            .catch(function() {
                 $timeout(function() {
                     locals.user = null;
                     $state.go('login');

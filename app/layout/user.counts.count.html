@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <div>
     <div class="row">
         <h2>фирма: {{firm.name}}</h2>
@@ -16,7 +17,7 @@
 
         <div ng-show="creating">
             <div class="col-md-3">
-                <input type="text" class="form-control" placeholder="номер оферты" ng-model="num">
+                <input type="text" class="form-control" placeholder="сумма" ng-model="num">
             </div>
 
             <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="creating = false"> отмена </button>
@@ -29,9 +30,10 @@
     <table class="table table-condensed">
         <tr>
             <th style="min-width: 30px;">#</th>
-            <th style="min-width: 250px;">Номер оферты</th>
+            <th style="min-width: 250px;">Контрагент</th>
             <th style="min-width: 250px;">Дата создания</th>
-            <th style="min-width: 250px;">Системный номер</th>
+            <th style="min-width: 250px;">Сумма</th>
+            <th style="min-width: 250px;">№ оферты</th>
             <th style="min-width: 250px;">Управление</th>
         </tr>
         <tr ng-repeat="count in counts| orderBy : '-created'">
@@ -55,6 +57,7 @@
             <td>{{count.created|date : 'dd.MM.yyyy'}}</td>
             <td>{{count.sysNumber}}</td>
             <td>{{count.name}}</td>
+            <td></td>
         </tr>
     </table>
 </div>

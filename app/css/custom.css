@@ -19,4 +19,7 @@
     text-decoration: line-through;
 }
 
-
+.edit-component > span {
+    cursor: pointer;
+    text-decoration: underline;
+}

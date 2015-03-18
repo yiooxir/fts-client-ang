@@ -1,3 +1,4 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <div class="row" style="margin: 10px">
     <div class="col-md-3" >
         <div class="input-group">
@@ -34,15 +35,17 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>Имя</th>
-            <th>Фирма</th>
-            <th>Дата создания</th>
+            <th>Почта</th>
+            <th>Контрагент</th>
+            <th>Доступ к организациям</th>
+            <th>Дата</th>
             <th>Управление</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="user in users | orderBy : '-created' | fltUsersByFirm : filters.firm">
             <td>{{$index}}</td>
+            <td>{{user.username}}</td>
             <td>{{user.username}}</td>
             <td><field-firms user="user"></field-firms></td>
             <td>{{user.created|date : 'dd.MM.yyyy'}}</td>
