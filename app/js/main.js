@@ -45,8 +45,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'login'
         })
 
-        .state('main.registration', {
-            url: '/registration',
+        .state('registration', {
+            url: '/registration?:token',
             templateUrl: '/layout/auth.registration.html',
             controller: 'registration'
         })
@@ -57,22 +57,26 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: '/layout/admin.main.html',
             controller: 'adminMain'
         })
+
         .state('main.admin.firms', {
             url: '/firms',
             templateUrl: '/layout/admin.firms.html',
             controller: 'adminFirms'
         })
+
         .state('main.admin.users', {
             url: '/users',
             templateUrl: '/layout/admin.users.html',
             controller: 'adminUsers',
             resolve: require('./modules/admin/users.resolve.js')
         })
+
         .state('main.admin.records', {
             url: '/records',
             templateUrl: '/layout/admin.records.html',
             controller: 'adminRecords'
         })
+
         .state('main.admin.createToken', {
             url: '/createToken',
             templateUrl: '/layout/admin.createToken.html',
@@ -86,15 +90,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: '/layout/user.counts.html',
             controller: 'userCounts'
         })
+
         .state('main.counts.count', {
             url: '/:id',
             templateUrl: '/layout/user.counts.count.html',
             controller: 'userCounts'
         })
+
         .state('main.state1', {
             url: "/state1",
             templateUrl: "/layout/state1.html"
         })
+
         .state('test', {
             url: '/test',
             templateUrl: '/layout/test.html',
@@ -120,17 +127,23 @@ app.run(function($rootScope, $state, $timeout) {
     };
 
     /* check auth. middleware */
-    $rootScope.$on('$stateChangeStart', function() {
-        api.getMe()
-            .then(function(res) {
-                $timeout(function() {locals.user = res});
-            })
-            .catch(function() {
-                $timeout(function() {
-                    locals.user = null;
-                    $state.go('login');
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+
+        if (fromState.name == 'registration' || toState.name == 'registration') {
+            return true;
+        }
+        else
+        {
+            api.getMe()
+                .then(function(res) {
+                    $timeout(function() {locals.user = res});
+                })
+                .catch(function() {
+                    $timeout(function() {
+                        $state.go('login');
+                    });
                 });
-            });
+        }
     })
 });
 
