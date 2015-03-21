@@ -90,7 +90,7 @@ module.exports = {
     },
 
     /* USERS
-    * ------------------------------------*/
+     * ------------------------------------*/
     getMe: function(){
         var req = new Req('/users/me');
         return req.send();
@@ -104,8 +104,8 @@ module.exports = {
         params.data = userName;
         ajax(params);
     },
-    createUser: function(userName, password) {
-        var req = new Req('/users/create', "POST", {userName: userName, password: password});
+    createUser: function(userName, password, token) {
+        var req = new Req('/users/create', "POST", {userName: userName, password: password, token: token});
         return req.send();
     },
     updateUser: function(id) {
@@ -122,8 +122,12 @@ module.exports = {
         var req = new Req('/users/tokens?used=' + used);
         return req.send();
     },
+    getToken: function(token) {
+        var req = new Req('/users/tokens/' + token);
+        return req.send();
+    },
     /* COUNTS
-    * -----------------------------------------*/
+     * -----------------------------------------*/
     getCounts: function() {
         var req = new Req('/counts');
         return req.send();

@@ -48,7 +48,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('registration', {
             url: '/registration?:token',
             templateUrl: '/layout/auth.registration.html',
-            controller: 'registration'
+            controller: 'registration',
+            resolve: require('./modules/auth/registration.resolve.js')
         })
 
         /* admin */
