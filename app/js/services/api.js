@@ -88,6 +88,9 @@ module.exports = {
     deleteFirm: function(id) {
 
     },
+
+    /* USERS
+    * ------------------------------------*/
     getMe: function(){
         var req = new Req('/users/me');
         return req.send();
@@ -111,6 +114,16 @@ module.exports = {
     deleteUser: function(id) {
 
     },
+    createToken: function(email) {
+        var req = new Req('/users/tokens', "POST", {username: email});
+        return req.send();
+    },
+    getTokens: function(used) {
+        var req = new Req('/users/tokens?used=' + used);
+        return req.send();
+    },
+    /* COUNTS
+    * -----------------------------------------*/
     getCounts: function() {
         var req = new Req('/counts');
         return req.send();

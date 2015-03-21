@@ -1,0 +1,35 @@
+<div class="row">
+    <h3>Создать пользователя</h3>
+    <p>Введите email для нового пользователя и нажмите "созать"</p>
+    <p>На указанный почтовый адрес будет направлено письмо со ссылкой для регистрации</p>
+    <p>Пароль для аккаунта и название контрагента укажет пользователь при переходе на отправленную ему ссылку </p>
+    <p>Далее, назначтье пользователю доступные организации в разделе <a href="" ui-sref="main.admin.users">"организации"</a>. После этого данный пользователь сможет создавать фактуры.</p>
+    <div class="col-md-4">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="email" ng-model="email">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="createToken(email)">Создать</button>
+      </span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <h3>Список не верифицированных контрагентов.</h3>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>email</th>
+            <th>управление</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="token in tokens | orderBy : '-created'">
+            <td>{{$index+1}}</td>
+            <td>{{token.username}}</td>
+            <td><a href="" ng-click="createToken(token.username)"><i class="fa fa-upload"></i></a></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
