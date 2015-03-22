@@ -2,6 +2,8 @@
  * Created by sergey on 15.03.15.
  */
 
+var api = require('../../services/api');
+
 module.exports = function($scope) {
 
     $scope.firms = $scope.$parent.firms;
