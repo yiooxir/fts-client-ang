@@ -144,7 +144,8 @@ module.exports = {
         var req = new Req('/counts/' + id, "PUT", value);
         return req.send();
     },
-    deleteCount: function() {
-
+    deleteCount: function(id) {
+        var req = new Req('/counts/' + id, "DELETE");
+        return req.send();
     }
 };

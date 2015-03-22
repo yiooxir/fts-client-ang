@@ -17,7 +17,6 @@ var app = angular.module('app', ['ui.router']);
 /* angular modules */
 require('./modules/main');
 require('./modules/counts');
-require('./services');
 require('./modules/auth');
 require('./modules/test');
 require('./modules/admin');
