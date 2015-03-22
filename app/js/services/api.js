@@ -140,8 +140,8 @@ module.exports = {
         var req = new Req('/counts/create', "POST", value);
         return req.send();
     },
-    updateCount: function(id, value) {
-        var req = new Req('/counts/' + id, "PUT", value);
+    updateCount: function(id, values) {
+        var req = new Req('/counts/' + id, "PUT", values);
         return req.send();
     },
     deleteCount: function(id) {

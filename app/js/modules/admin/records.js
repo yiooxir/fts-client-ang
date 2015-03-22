@@ -4,19 +4,18 @@
 
 var api = require('../../services/api');
 
-module.exports = function($scope) {
+module.exports = function($scope, $state) {
 
     $scope.firms = $scope.$parent.firms;
     $scope.users = $scope.$parent.users;
     $scope.counts = $scope.$parent.counts;
-    $scope.creating = false;
     $scope.filters = $scope.$parent.filters;
 
     $scope.options = {
         onChange: function(params) {
             if (!params.value) return alert('Ошибка. Нельзя сохранять пустое значение');
 
-            api.updateFirm(params.object._id, params.hash)
+            api.updateCount(params.object._id, params.hash)
                 .then(function() {
                     $state.go($state.current, {}, {reload: true})
                 })
