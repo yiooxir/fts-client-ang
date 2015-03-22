@@ -102,6 +102,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: "/layout/state1.html"
         })
 
+        .state('main.about', {
+            url: "/about",
+            templateUrl: "/layout/main.about.html"
+        })
+
         .state('test', {
             url: '/test',
             templateUrl: '/layout/test.html',

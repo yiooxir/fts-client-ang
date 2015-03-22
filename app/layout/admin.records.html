@@ -1,13 +1,15 @@
 <!--suppress HtmlFormInputWithoutLabel -->
-<div class="row" style="margin: 10px">
-    <div class="col-md-3" >
-        <div class="input-group">
-            <span class="input-group-addon">поиск</span>
-            <input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
-        </div>
-    </div>
+<!--<div class="row" style="margin: 10px">-->
+    <!--<div class="col-md-3" >-->
+        <!--<div class="input-group">-->
+            <!--<span class="input-group-addon">поиск</span>-->
+            <!--<input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="row">
+    <h3>Фактуры пользователей. </h3>
 </div>
-
 <div class="row">
     <remove-filter></remove-filter>
 </div>
@@ -23,10 +25,10 @@
     </tr>
     <tr ng-repeat="count in counts | orderBy : '-created' | fltRecByUser:filters.user | fltRecByFirm: filters.firm">
         <td>{{$index}}</td>
-        <td>{{count.num}}</td>
-        <td>{{getUser(count).username}}</td>
-        <td>{{getFirm(count).name}}</td>
-        <td>{{count.created|date : 'dd.MM.yyyy'}}</td>
+        <td>{{count.systemNum}}</td>
+        <td><field-date object="count" field="created" option="options"></field-date></td>
+        <td><field-input object="count" field="amount" option="options"></field-input></td>
+        <td>{{getUser(count.createdBy).contractor}}</td>
         <td>{{count.sysNumber}}</td>
     </tr>
 </table>
