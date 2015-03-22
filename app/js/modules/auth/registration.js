@@ -34,7 +34,16 @@ module.exports = function($scope, token, $state) {
         api.createUser(values)
             .then(function() {
                 $scope.errMessage = '';
-                $state.go('main.counts', {}, {reload: true})
+            })
+            .then(function() {
+                api.login(values.username, values.password);
+            })
+            .then(function(){
+                $state.go('main.state1', {}, {reload: true})
+            })
+            .catch(function(err) {
+                alert('Ошибка. Не удалось создать пользователя.');
+                console.error(err);
             })
     }
 };
