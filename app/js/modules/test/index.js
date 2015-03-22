@@ -8,7 +8,7 @@ var api = require('../../services/api');
 
 module.exports = app.controller('test', function($rootScope, $scope, $timeout) {
 
-    $scope.userName = $rootScope.locals.getUserName();
+    $scope.username = $rootScope.locals.getUserName();
 
     $scope.logout = function() {
         api.logout()
@@ -22,7 +22,7 @@ module.exports = app.controller('test', function($rootScope, $scope, $timeout) {
     };
     $scope.createUser = function() {
 
-        api.createUser({userName: $scope.userName, password: $scope.password})
+        api.createUser({username: $scope.username, password: $scope.password})
     };
 
     $scope.createFirm = function() {

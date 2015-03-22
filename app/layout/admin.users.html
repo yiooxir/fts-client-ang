@@ -1,31 +1,33 @@
 <!--suppress HtmlFormInputWithoutLabel -->
-<div class="row" style="margin: 10px">
-    <div class="col-md-3" >
-        <div class="input-group">
-            <span class="input-group-addon">поиск</span>
-            <input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">
-        </div>
-    </div>
+<!--<div class="row" style="margin: 10px">-->
+    <!--<div class="col-md-3" >-->
+        <!--<div class="input-group">-->
+            <!--<span class="input-group-addon">поиск</span>-->
+            <!--<input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">-->
+        <!--</div>-->
+    <!--</div>-->
 
-    <div class="col-md-3" ng-show="!creating">
-        <button type="button" class="btn btn-default" ng-click="creating = true" > Добавить пользователя </button>
-    </div>
+    <!--<div class="col-md-3" ng-show="!creating">-->
+        <!--<button type="button" class="btn btn-default" ng-click="creating = true" > Добавить пользователя </button>-->
+    <!--</div>-->
 
-    <div ng-show="creating">
-        <div class="col-md-3">
-            <input type="text" class="form-control" placeholder="login/e-mal" ng-model="userName">
-        </div>
-        <div class="col-md-2">
-            <input type="text" class="form-control" placeholder="password" ng-model="password">
-        </div>
+    <!--<div ng-show="creating">-->
+        <!--<div class="col-md-3">-->
+            <!--<input type="text" class="form-control" placeholder="login/e-mal" ng-model="username">-->
+        <!--</div>-->
+        <!--<div class="col-md-2">-->
+            <!--<input type="text" class="form-control" placeholder="password" ng-model="password">-->
+        <!--</div>-->
 
-        <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="creating = false"> отмена </button>
-        <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="createUser()"> сохранить </button>
+        <!--<button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="creating = false"> отмена </button>-->
+        <!--<button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="createUser()"> сохранить </button>-->
 
-    </div>
+    <!--</div>-->
 
+<!--</div>-->
+<div class="row">
+    <h3>Список контрагентов </h3>
 </div>
-
 <div class="row">
     <remove-filter></remove-filter>
 </div>
@@ -43,12 +45,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="user in users | orderBy : '-created' | fltUsersByFirm : filters.firm">
+        <tr ng-repeat="user in users | fltUsersByFirm : filters.firm">
             <td>{{$index}}</td>
             <td>{{user.username}}</td>
-            <td>{{user.username}}</td>
+            <td><field-input object='user' field="contractor" options="options"></field-input></td>
             <td><field-firms user="user"></field-firms></td>
-            <td>{{user.created|date : 'dd.MM.yyyy'}}</td>
+            <td><field-date object="user" options="options" field="created"></field-date></td>
             <td class="management">
                 <span>
                     <a href="" title="Смотреть фирмы пользователя"

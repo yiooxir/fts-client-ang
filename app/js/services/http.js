@@ -10,7 +10,7 @@ console.log('init resource');
         $.ajax({
             url: "http://127.0.0.1:3000/users/login",
             type:'POST',
-            data: JSON.stringify({userName: 'admin', password: '123'}),
+            data: JSON.stringify({username: 'admin', password: '123'}),
             dataType: 'json',
             //crossDomain: true,
             contentType: 'application/json',

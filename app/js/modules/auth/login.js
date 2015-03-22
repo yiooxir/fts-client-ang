@@ -6,13 +6,13 @@ var api = require('../../services/api');
 
 module.exports = function($rootScope, $scope, $state, $timeout) {
 
-    $scope.userName = "";
+    $scope.username = "";
     $scope.password = "";
 
 
 
     $scope.login = function() {
-        api.login($scope.userName, $scope.password)
+        api.login($scope.username, $scope.password)
             .then(function(user) {
                 $timeout(function(){
                     var state = user.isSuperUser ? 'main.admin.users' : 'main.counts';

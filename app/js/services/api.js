@@ -55,8 +55,8 @@ Req.prototype = {
 };
 
 module.exports = {
-    login: function(userName, password) {
-        var req = new Req('/users/login', "POST", {userName: userName, password: password});
+    login: function(username, password) {
+        var req = new Req('/users/login', "POST", {username: username, password: password});
         return req.send();
     },
     logout: function() {
@@ -99,23 +99,25 @@ module.exports = {
         var req = new Req('/users');
         return req.send();
     },
-    findUser: function(userName) {
+    findUser: function(username) {
         params.url = 'http://127.0.0.1:3000/users/find';
-        params.data = userName;
+        params.data = username;
         ajax(params);
     },
-    createUser: function(userName, password, token) {
-        var req = new Req('/users/create', "POST", {userName: userName, password: password, token: token});
+    createUser: function(values) {
+        var req = new Req('/users/create', "POST", values);
         return req.send();
     },
-    updateUser: function(id) {
-
+    updateUser: function(userId, _values) {
+        var values = _values || {};
+        var req = new Req('/users/' + userId, "PUT", values);
+        return req.send();
     },
     deleteUser: function(id) {
 
     },
-    createToken: function(email) {
-        var req = new Req('/users/tokens', "POST", {username: email});
+    createToken: function(email, startNum) {
+        var req = new Req('/users/tokens', "POST", {username: email, startNum: startNum});
         return req.send();
     },
     getTokens: function(used) {

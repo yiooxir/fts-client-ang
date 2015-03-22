@@ -11,11 +11,15 @@ module.exports = function($timeout, $parse) {
         restrict: "E",
         templateUrl: "/layout/component.field-date.html",
         scope: {
-            value: '='
+            object: '=',
+            field: '@'
         },
+
         compile: function($element, $attr) {
 
             return function($scope, $element) {
+
+                $scope.value = $scope.object[$scope.field];
                 $scope.editMode = false;
                 $element = $($element);
 
@@ -34,11 +38,15 @@ module.exports = function($timeout, $parse) {
                     autoclose: true
                 })
                     .on('changeDate', function(e){
-                        console.log(e);
                         $timeout(function() {
                             $scope.editMode = false;
                             $scope.value = e.date;
-                            options.onChange($scope.value);
+                            options.onChange({
+                                affectedField: $scope.field,
+                                object: $scope.object,
+                                value: e.date,
+                                hash: (function() {var v = {}; v[$scope.field] = $scope.value; return v})()
+                            });
                         });
                     });
 

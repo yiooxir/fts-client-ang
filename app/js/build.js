@@ -25126,8 +25126,8 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
        </script>
        <div ng-controller="ExampleController">
          <form name="myForm">
-           User name: <input type="text" name="userName" ng-model="user.name" required>
-           <span class="error" ng-show="myForm.userName.$error.required">
+           User name: <input type="text" name="username" ng-model="user.name" required>
+           <span class="error" ng-show="myForm.username.$error.required">
              Required!</span><br>
            Last name: <input type="text" name="lastName" ng-model="user.last"
              ng-minlength="3" ng-maxlength="10">
@@ -25138,8 +25138,8 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
          </form>
          <hr>
          <tt>user = {{user}}</tt><br/>
-         <tt>myForm.userName.$valid = {{myForm.userName.$valid}}</tt><br>
-         <tt>myForm.userName.$error = {{myForm.userName.$error}}</tt><br>
+         <tt>myForm.username.$valid = {{myForm.username.$valid}}</tt><br>
+         <tt>myForm.username.$error = {{myForm.username.$error}}</tt><br>
          <tt>myForm.lastName.$valid = {{myForm.lastName.$valid}}</tt><br>
          <tt>myForm.lastName.$error = {{myForm.lastName.$error}}</tt><br>
          <tt>myForm.$valid = {{myForm.$valid}}</tt><br>
@@ -25150,25 +25150,25 @@ function checkboxInputType(scope, element, attr, ctrl, $sniffer, $browser, $filt
       </file>
       <file name="protractor.js" type="protractor">
         var user = element(by.exactBinding('user'));
-        var userNameValid = element(by.binding('myForm.userName.$valid'));
+        var usernameValid = element(by.binding('myForm.username.$valid'));
         var lastNameValid = element(by.binding('myForm.lastName.$valid'));
         var lastNameError = element(by.binding('myForm.lastName.$error'));
         var formValid = element(by.binding('myForm.$valid'));
-        var userNameInput = element(by.model('user.name'));
+        var usernameInput = element(by.model('user.name'));
         var userLastInput = element(by.model('user.last'));
 
         it('should initialize to model', function() {
           expect(user.getText()).toContain('{"name":"guest","last":"visitor"}');
-          expect(userNameValid.getText()).toContain('true');
+          expect(usernameValid.getText()).toContain('true');
           expect(formValid.getText()).toContain('true');
         });
 
         it('should be invalid if empty when required', function() {
-          userNameInput.clear();
-          userNameInput.sendKeys('');
+          usernameInput.clear();
+          usernameInput.sendKeys('');
 
           expect(user.getText()).toContain('{"last":"visitor"}');
-          expect(userNameValid.getText()).toContain('false');
+          expect(usernameValid.getText()).toContain('false');
           expect(formValid.getText()).toContain('false');
         });
 
@@ -27586,7 +27586,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  * in order to fulfill the validation and a status level of `4xx` in order to reject the validation.
  *
  * ```js
- * ngModel.$asyncValidators.uniqueUsername = function(modelValue, viewValue) {
+ * ngModel.$asyncValidators.uniqueusername = function(modelValue, viewValue) {
  *   var value = modelValue || viewValue;
  *
  *   // Lookup user by username
@@ -28479,7 +28479,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
        <div ng-controller="ExampleController">
          <form name="userForm">
            Name:
-           <input type="text" name="userName"
+           <input type="text" name="username"
                   ng-model="user.name"
                   ng-model-options="{ getterSetter: true }" />
          </form>
@@ -28612,7 +28612,7 @@ var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
       <div ng-controller="ExampleController">
         <form name="userForm">
           Name:
-          <input type="text" name="userName"
+          <input type="text" name="username"
                  ng-model="user.name"
                  ng-model-options="{ updateOn: 'blur' }"
                  ng-keyup="cancel($event)" /><br />
@@ -28630,7 +28630,7 @@ var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
 
           $scope.cancel = function(e) {
             if (e.keyCode == 27) {
-              $scope.userForm.userName.$rollbackViewValue();
+              $scope.userForm.username.$rollbackViewValue();
             }
           };
         }]);
@@ -28667,10 +28667,10 @@ var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
       <div ng-controller="ExampleController">
         <form name="userForm">
           Name:
-          <input type="text" name="userName"
+          <input type="text" name="username"
                  ng-model="user.name"
                  ng-model-options="{ debounce: 1000 }" />
-          <button ng-click="userForm.userName.$rollbackViewValue(); user.name=''">Clear</button><br />
+          <button ng-click="userForm.username.$rollbackViewValue(); user.name=''">Clear</button><br />
         </form>
         <pre>user.name = <span ng-bind="user.name"></span></pre>
       </div>
@@ -28690,7 +28690,7 @@ var DEFAULT_REGEXP = /(\s+|^)default(\s+|$)/;
       <div ng-controller="ExampleController">
         <form name="userForm">
           Name:
-          <input type="text" name="userName"
+          <input type="text" name="username"
                  ng-model="user.name"
                  ng-model-options="{ getterSetter: true }" />
         </form>

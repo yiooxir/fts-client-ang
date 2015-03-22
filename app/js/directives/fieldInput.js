@@ -12,15 +12,20 @@ module.exports = function($timeout, $parse) {
         restrict: "E",
         templateUrl: '/layout/component.field-input.html',
         scope: {
-            value: '='
+            object: '=',
+            field: '@'
         },
         link: function($scope, $element, $attr) {
             $element = $($element);
+
+            $scope.value = $scope.object[$scope.field];
+            $scope.editMode = false;
+
             var get = $parse($attr.options);
             var options = null;
             var $input = $element.find('input');
             var cacheValue = null;
-            $scope.editMode = false;
+
 
             $scope.$watch('editMode', function(val) {
                 if (val) {
@@ -41,7 +46,12 @@ module.exports = function($timeout, $parse) {
             }
 
             $scope.change = function() {
-                options.onChange($scope.value);
+                options.onChange({
+                    affectedField: $scope.field,
+                    object: $scope.object,
+                    value: $scope.value,
+                    hash: (function() {var v = {}; v[$scope.field] = $scope.value; return v})()
+                });
                 exitEditMode();
             };
 

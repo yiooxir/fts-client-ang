@@ -8,10 +8,11 @@ module.exports = function($scope, $state, tokens) {
 
     $scope.tokens = tokens;
     $scope.email = '';
+    $scope.startNum = '';
 
-    $scope.createToken = function(email) {
+    $scope.createToken = function(email, startNum) {
         console.count('createToken');
-        api.createToken(email)
+        api.createToken(email, startNum)
             .then(function() {
                 $state.go($state.current, {}, {reload: true});
             })

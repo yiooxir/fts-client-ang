@@ -7,6 +7,7 @@ var api = require('../../services/api');
 module.exports = function($scope, token, $state) {
     $scope.token = token;
     $scope.errMessage = '';
+    $scope.contractor = '';
     $scope.password = '';
     $scope.confirmPassword = '';
     $scope.err = null;
@@ -18,11 +19,19 @@ module.exports = function($scope, token, $state) {
         $scope.err = 2;
     }
 
-    $scope.create = function(password, confirm) {
+    $scope.create = function(contractor, password, confirm) {
+        if (!contractor) return $scope.message('Название контрагента обязательное поле');
         if (!token.username || !password) return $scope.errMessage='имя пользователя или пароль не введены';
         if (password != confirm) return $scope.errMessage = 'пароли не совпадают';
 
-        api.createUser(token.username, password, token.token)
+        var values = {
+            contractor: contractor,
+            username: token.username,
+            token: token.token,
+            password: password
+        };
+
+        api.createUser(values)
             .then(function() {
                 $scope.errMessage = '';
                 $state.go('main.counts', {}, {reload: true})

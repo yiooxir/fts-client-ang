@@ -12,20 +12,21 @@
 
                     <!--<input type="text" ng-model="userName" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Email" required="" >-->
 
+                    <input ng-model="contractor" class="form-control" placeholder="название контрагента" >
+
                     <input type="password" ng-model="password" class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="Password" >
 
                     <input type="password" ng-model="confirmPassword " class="form-control ng-pristine ng-invalid ng-invalid-required" placeholder="check password" >
 
                     <p class="text-center text-danger" ng-show="errMessage">{{errMessage}}</p>
 
-                    <button class="btn btn-lg btn-primary btn-block" ng-click="create(password, confirmPassword)" style="margin: 10px 0">
+                    <button class="btn btn-lg btn-primary btn-block" ng-click="create(contractor, password, confirmPassword)" style="margin: 10px 0">
                         Зарегистрироваться
                     </button>
 
                     <!--<a href=""> напомнить пароль </a>-->
                     <a href="" class="pull-right need-help" ui-sref="login">авторизация </a><span class="clearfix"></span>
 
-                    {{password}}
                 </form>
             </div>
             </div>
