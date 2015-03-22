@@ -116,8 +116,8 @@ module.exports = {
     deleteUser: function(id) {
 
     },
-    createToken: function(email, startNum) {
-        var req = new Req('/users/tokens', "POST", {username: email, startNum: startNum});
+    createToken: function(email, firm) {
+        var req = new Req('/users/tokens', "POST", {username: email, firm: firm});
         return req.send();
     },
     getTokens: function(used) {
