@@ -72,8 +72,9 @@ module.exports = {
 
         return req.send();
     },
-    updateFirm: function(id) {
-
+    updateFirm: function(id, values) {
+        var  req = new Req('/firms/'+ id, "PUT", values);
+        return req.send();
     },
     linkToFirm: function(userId, firmId) {
         var req = new Req('/users/'+userId + '/linkToFirm', "PUT", {firmId: firmId});

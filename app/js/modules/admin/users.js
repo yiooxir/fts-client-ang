@@ -22,8 +22,6 @@ module.exports = function($scope, users, $state, $timeout) {
         }
     };
 
-    $scope.chageContragent =
-
     $scope.createUser = function() {
         if (!$scope.username || !$scope.password) {
             alert('Имя пользователя и пароль должны быть заполнены');

@@ -4,13 +4,13 @@
 var api = require('../../services/api');
 
 module.exports = function($scope, $state) {
+
     $scope.firms = $scope.$parent.firms;
-
     $scope.users = $scope.$parent.users;
-
     $scope.creating = false;
-
     $scope.filters = $scope.$parent.filters;
+    $scope.startNum = '';
+    $scope.progress = false;
 
     $scope.filtered = function() {
         if (!$scope.filters.user) return $scope.firms;
@@ -20,16 +20,33 @@ module.exports = function($scope, $state) {
         })
     };
 
+    $scope.options = {
+        onChange: function(params) {
+            if (!params.value) return alert('Ошибка. Нельзя сохранять пустое значение');
+
+            api.updateFirm(params.object._id, params.hash)
+                .then(function() {
+                    $state.go($state.current, {}, {reload: true})
+                })
+                .catch(function(err) {
+                    alert('Ошибка при изменении значения поля');
+                    console.error(err);
+                })
+        }
+    };
+
     $scope.create = function() {
         if (!$scope.name) {
             alert('Не указано название фирмы');
         } else {
-            api.createFirm({name: $scope.name})
+            $scope.progress = true;
+            api.createFirm({name: $scope.name, startNum: $scope.startNum || 0})
                 .then(function() {
                     $state.go($state.current, {}, {reload: true});
                 })
                 .catch(function(err) {
-                    alert('не удалось создать фирму. Обратитесь к администратору системы.');
+                    $scope.progress = false;
+                    alert('Ошибка при создании фирмы');
                     $scope.creating = false;
                 })
         }

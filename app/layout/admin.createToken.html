@@ -7,7 +7,7 @@
 
     <div class="col-md-4">
 
-        <input type="text" class="form-control" placeholder="email" ng-model="email">
+        <input type="email" class="form-control" placeholder="email" ng-model="email">
 
         <select ng-if="!!firms.length" ng-model="selectedFirm" class="form-control"
                 ng-options="firm as firm.name for firm in firms"> выберите фирму

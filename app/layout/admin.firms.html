@@ -12,11 +12,16 @@
 
     <div ng-show="creating">
         <div class="col-md-3">
-            <input type="text" class="form-control" placeholder="название фирмы" ng-model="name">
+                <input type="text" class="form-control" placeholder="название фирмы" ng-model="name">
+        </div>
+        <div class="col-md-2">
+            <input type="number" class="form-control" placeholder="нумерация СФ с ..." pattern="^[ 0-9]+$" ng-model="startNum">
         </div>
 
         <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="creating = false"> отмена </button>
-        <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="create()"> сохранить </button>
+        <button type="button" class="btn btn-default dropdown-toggle" aria-expanded="false" ng-click="create()">
+            Сохранить <i class="fa-li fa fa-spinner fa-spin" style="position: inherit" ng-show="progress"></i>
+        </button>
 
     </div>
 
@@ -36,9 +41,9 @@
     </tr>
     <tr ng-repeat="firm in filtered()">
         <td>{{$index}}</td>
-        <td><field-input value="firm.name"></field-input></td>
-        <td><field-date value="firm.created"></field-date></td>
-        <td>{{firm.created|date : 'dd.MM.yyyy'}}</td>
+        <td><field-input object="firm" field="name" options="options"></field-input></td>
+        <td><field-date object="firm" field="created" options="options"></field-date></td>
+        <td>{{firm.startNum}}</td>
         <td>
             <a href="" title="смотреть записи по данной фирме"
                ng-click="filters.firm = firm"
