@@ -12,7 +12,7 @@ var gulp       = require('gulp'),
     connect    = require('gulp-connect'),
     rename     = require('gulp-rename'),
     browserify = require('gulp-browserify'),
-    port       = 8010;
+    port       = 3010;
 
 gulp.task('browserify', function () {
     gulp.src('./app/js/main.js')

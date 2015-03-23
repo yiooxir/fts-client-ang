@@ -9,22 +9,43 @@
             <button type="button" class="btn btn-default" ng-click="creating = true" > Добавить фактуру </button>
         </div>
 
-        <div ng-show="creating">
+        <div class="col-md-6"  ng-show="creating">
+            <div>
 
-            <form class="form-inline">
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon">Руб.</div>
-                        <input type="text" ng-model="amount" class="form-control" placeholder="Сумма">
-                        <div class="input-group-addon">
-                            <field-date object="dateNow" field="created"></field-date>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">Руб.</div>
+                            <input type="text" ng-model="amount" class="form-control" placeholder="Сумма">
+                            <div class="input-group-addon">
+                                <field-date object="dateNow" field="created"></field-date>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button type="button" class="btn btn-default" ng-click="create()">Создать <i class="fa-li fa fa-spinner fa-spin" style="position: inherit" ng-show="progress"></i></button>
-                <button type="button" class="btn btn-default">Отмена</button>
-            </form>
+                    <button type="button" class="btn btn-default" ng-click="create()">Создать <i class="fa-li fa fa-spinner fa-spin" style="position: inherit" ng-show="progress"></i></button>
+                    <button type="button" class="btn btn-default" ng-click="creating=false">Отмена</button>
+                </form>
+            </div>
         </div>
+
+        <div class="col-md-3">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-default"
+                            ng-click="closed=true" ng-class="{active:closed}"
+                            title="показать оферты с номером">
+                        <i class="fa fa-lock"></i></button>
+                    <button type="button" class="btn btn-default"
+                            ng-click="closed=false" ng-class="{active:!closed}"
+                            title="показать оферты без номера">
+                        <i class="fa fa-unlock"></i></button>
+                    <!--<button type="button" class="btn btn-default">март 2015 {{closed}}</button>-->
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
 
 
@@ -37,12 +58,12 @@
             <th style="min-width: 250px;">№ оферты</th>
             <th style="min-width: 250px;">Управление</th>
         </tr>
-        <tr ng-repeat="count in counts">
+        <tr ng-repeat="count in filtered() | filter: {firm: firm._id}">
             <td>{{$index+1}}</td>
             <td>{{locals.user.contractor}}</td>
             <td><field-date object="count" field="created" options="options"></field-date></td>
             <td><field-input object="count" field="amount" options="options"></field-input></td>
-            <td>---</td>
+            <td>{{count.sysNumber || 'нет номера'}}</td>
             <td>
                 <a href="" ng-click="remove(count)" ng-if="!count.sysNumber"><i class="fa fa-times"></i></a>
             </td>

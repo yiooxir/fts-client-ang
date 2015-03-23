@@ -13,6 +13,9 @@ module.exports = function($scope, $stateParams, $rootScope, $state) {
     $scope.dateNow = {created: new Date()};
     $scope.progress = false;
     $scope.amount = '';
+    $scope.closed = false;
+
+
 
     $scope.options = {
         onChange: function(params) {
@@ -29,6 +32,16 @@ module.exports = function($scope, $stateParams, $rootScope, $state) {
         }
     };
 
+    console.count('controller');
+
+    $scope.filtered = function() {
+        if ($scope.closed) {
+            return _.filter($scope.counts, function(count) {return count.sysNumber > 0})
+        }
+        else {
+            return _.filter($scope.counts, function(count) {return !count.hasOwnProperty('sysNumber')})
+        }
+    };
 
     $scope.create = function() {
         api.createCount({
@@ -38,7 +51,7 @@ module.exports = function($scope, $stateParams, $rootScope, $state) {
             createdBy: $rootScope.locals.user._id
         })
             .then(function() {
-                $state.go($state.current, $stateParams, {reload: true})
+                //$state.go($state.current, $stateParams, {reload: true})
             })
             .catch(function(err) {
                 $scope.progress = false;
