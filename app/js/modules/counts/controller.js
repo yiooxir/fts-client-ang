@@ -33,8 +33,6 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
         }
     };
 
-    console.count('controller');
-
     $scope.filtered = function() {
         if ($scope.closed) {
             return _.filter($scope.counts, function(count) {return count.sysNumber > 0})
