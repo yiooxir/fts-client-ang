@@ -3,10 +3,11 @@
  */
 var api = require('../../services/api');
 
-module.exports = function($scope, $stateParams, $rootScope, $state) {
+module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
 
     $scope.firms = $scope.$parent.firms;
     $scope.counts = $scope.$parent.counts;
+    console.log($scope.counts)
     $scope.firm = $stateParams.id ? _.findWhere($scope.firms, {_id: $stateParams.id}) : null;
     $scope.creating = false;
     $scope.updating = false;
@@ -50,7 +51,9 @@ module.exports = function($scope, $stateParams, $rootScope, $state) {
             created: $scope.dateNow.created,
             createdBy: $rootScope.locals.user._id
         })
-            .then(function() {
+            .then(function(res) {
+                $timeout(function() {$scope.counts.unshift(res)})
+
                 //$state.go($state.current, $stateParams, {reload: true})
             })
             .catch(function(err) {
@@ -65,7 +68,7 @@ module.exports = function($scope, $stateParams, $rootScope, $state) {
 
         api.updateCount(id, values)
             .then(function() {
-                $state.go($state.current, $stateParams, {reload: true})
+                //$state.go($state.current, $stateParams, {reload: true})
             })
             .catch(function(err) {
                 alert('Ошибка, не удалось обновить значение');
