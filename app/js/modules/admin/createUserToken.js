@@ -2,9 +2,10 @@
  * Created by sergey on 21.03.15.
  */
 
+var utils = require('../../utils');
 var api = require('../../services/api');
 
-module.exports = function($scope, $state, tokens) {
+module.exports = function($scope, $state, tokens, $timeout) {
 
     $scope.tokens = tokens;
     $scope.email = '';
@@ -20,8 +21,11 @@ module.exports = function($scope, $state, tokens) {
         $scope.progress = true;
 
         api.createToken(email, selectedFirm._id || '')
-            .then(function() {
-                $state.go($state.current, {}, {reload: true});
+            .then(function(res) {
+                $timeout(function() {
+                    $scope.progress = false;
+                    $scope.tokens.unshift(res)
+                });
             })
             .catch(function(err) {
                 console.error(err);
@@ -33,4 +37,17 @@ module.exports = function($scope, $state, tokens) {
                 alert('Ошибка отправки приглашения');
             })
     };
+
+    $scope.removeToken = function(token) {
+        api.deleteToken(token._id)
+            .then(function() {
+                $timeout(function() {
+                    $scope.tokens.splice(utils.getIndexById($scope.tokens, token._id), 1)
+                })
+            })
+            .catch(function(err) {
+                console.error(err);
+                alert('Ошибка обновления данных на сервере');
+            })
+    }
 };

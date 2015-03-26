@@ -2,6 +2,7 @@
  * Created by sergey on 15.03.15.
  */
 
+var utils = require('../../utils');
 var api = require('../../services/api');
 
 module.exports = function($scope, $timeout) {
@@ -34,10 +35,10 @@ module.exports = function($scope, $timeout) {
         return _.findWhere($scope.users, {_id: id})
     };
 
-    $scope.remove = function(count, index) {
+    $scope.remove = function(count) {
         api.deleteCount(count._id)
             .then(function() {
-                $timeout($scope.counts.splice(index, 1));
+                $timeout($scope.counts.splice(utils.getIndexById($scope.counts, count._id), 1));
             })
             .catch(function(err) {
                 console.error(err);

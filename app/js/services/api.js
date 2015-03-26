@@ -129,6 +129,10 @@ module.exports = {
         var req = new Req('/users/tokens/' + token);
         return req.send();
     },
+    deleteToken: function(tokenId) {
+        var req = new Req('/users/tokens/' +tokenId, 'DELETE');
+        return req.send();
+    },
     /* COUNTS
      * -----------------------------------------*/
     getCounts: function() {
