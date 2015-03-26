@@ -20,15 +20,17 @@
         <th>№ оферты</th>
         <th>Дата</th>
         <th>Сумма</th>
-        <th>Контрагент</th>
+        <th>Контрагенты</th>
+        <th>№СФ</th>
         <th>Управление</th>
     </tr>
-    <tr ng-repeat="count in counts | orderBy : '-created' | fltRecByUser:filters.user | fltRecByFirm: filters.firm">
+    <tr ng-repeat="count in counts | orderBy : 'contractor' | fltRecByUser:filters.user | fltRecByFirm: filters.firm">
         <td>{{$index}}</td>
         <td>{{count.systemNum}}</td>
         <td><field-date object="count" field="created" options="options"></field-date></td>
         <td><field-input object="count" field="amount" options="options"></field-input></td>
         <td>{{getUser(count.createdBy).contractor}}</td>
         <td>{{count.sysNumber}}</td>
+        <td><a href="" ng-click="remove(count, $index)"><i class="fa fa-times"></i></a></td>
     </tr>
 </table>

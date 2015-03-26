@@ -4,7 +4,7 @@
 
 var api = require('../../services/api');
 
-module.exports = function($scope, $state) {
+module.exports = function($scope, $timeout) {
 
     $scope.firms = $scope.$parent.firms;
     $scope.users = $scope.$parent.users;
@@ -34,7 +34,14 @@ module.exports = function($scope, $state) {
         return _.findWhere($scope.users, {_id: id})
     };
 
-    $scope.filtered = function() {
-
+    $scope.remove = function(count, index) {
+        api.deleteCount(count._id)
+            .then(function() {
+                $timeout($scope.counts.splice(index, 1));
+            })
+            .catch(function(err) {
+                console.error(err);
+                alert('Ошибка обновления данных на сервере');
+            })
     }
 };
