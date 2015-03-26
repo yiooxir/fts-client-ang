@@ -37,3 +37,57 @@
     z-index: 99;
     border: 1px solid grey;
 }
+
+.multiselect {
+    max-width: 400px;
+    position: relative;
+}
+.multiselect ul{
+    width: 100%;
+    padding: 0;
+
+}
+.multiselect ul.selected  {
+    padding: 1px;
+    overflow: hidden;
+}
+.multiselect li {
+    list-style: none;
+}
+.multiselect .selected li {
+    position: relative;
+    margin: 3px;
+    padding: 2px 5px;
+    border: 1px solid #aaa;
+    max-width: 100%;
+    border-radius: 3px;
+    background-color: #eeeeee;
+    float: left;
+
+}
+.multiselect .selected li i {
+    opacity: 0.5;
+    cursor: pointer;
+}
+.multiselect .selected li i:hover {
+    opacity: 1;
+}
+
+.multiselect div.dropdown {
+    display: none;
+    max-height: 180px;
+    overflow-y: auto;
+    position: absolute;
+    background: white;
+    z-index: 999;
+    border: 1px solid gainsboro;
+    width: 100%;
+}
+
+.multiselect .dropdown li {
+    padding: 1px 5px;
+    cursor: pointer;
+}
+.multiselect .dropdown li:hover {
+    background: lightgrey;
+}
