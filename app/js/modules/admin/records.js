@@ -17,7 +17,7 @@ module.exports = function($scope, $state) {
 
             api.updateCount(params.object._id, params.hash)
                 .then(function() {
-                    $state.go($state.current, {}, {reload: true})
+                    //$state.go($state.current, {}, {reload: true})
                 })
                 .catch(function(err) {
                     alert('Ошибка при изменении значения поля');

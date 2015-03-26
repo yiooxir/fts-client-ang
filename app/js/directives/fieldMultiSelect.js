@@ -50,11 +50,12 @@ module.exports = function($timeout) {
 
             $scope.set = function(e, object) {
                 $scope.values.push(object._id);
+                $scope.dropdown = false;
                 $scope.$emit(eventName, _.defaults({action: 'add'}, req))
             };
 
             $scope.remove = function(e) {
-                $scope.values.splice($scope.values.indexOf(e._id),1);
+                $scope.values.splice($scope.values.indexOf(e), 1);
                 $scope.$emit(eventName, _.defaults({action: 'remove'}, req))
             };
 

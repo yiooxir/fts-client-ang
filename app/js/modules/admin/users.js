@@ -16,9 +16,6 @@ module.exports = function($scope, users, $state, $timeout) {
             if (!params.value) return alert('Ошибка. Нельзя сохранять пустое значение');
 
             api.updateUser(params.object._id, params.hash)
-                .then(function() {
-                    $state.go($state.current, {}, {reload: true})
-                })
         }
     };
 
@@ -28,8 +25,8 @@ module.exports = function($scope, users, $state, $timeout) {
             return;
         }
         api.createUser($scope.username, $scope.password)
-            .then(function() {
-                $state.go($state.current, {}, {reload: true});
+            .then(function(res) {
+                $timeout($scope.users.push(res));
             })
             .catch(function(err) {
                 if (err.responseJSON == "user with same name is already exists") {
@@ -40,6 +37,14 @@ module.exports = function($scope, users, $state, $timeout) {
                 }
                 console.error(err);
             })
-    }
+    };
+
+    $scope.$on('fieldMultiSelect', function(e, data) {
+        api.updateUser(data.id, {firms: data.values})
+            .catch(function(err) {
+                console.error(err);
+                alert('Не удалось обновить данные');
+            })
+    })
 
 };

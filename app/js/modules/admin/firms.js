@@ -3,7 +3,7 @@
  */
 var api = require('../../services/api');
 
-module.exports = function($scope, $state) {
+module.exports = function($scope, $state, $timeout) {
 
     $scope.firms = $scope.$parent.firms;
     $scope.users = $scope.$parent.users;
@@ -41,8 +41,12 @@ module.exports = function($scope, $state) {
         } else {
             $scope.progress = true;
             api.createFirm({name: $scope.name, startNum: $scope.startNum || 0})
-                .then(function() {
-                    $state.go($state.current, {}, {reload: true});
+                .then(function(res) {
+                    $timeout(function() {
+                        $scope.firms.unshift(res);
+                        $scope.progress = false;
+                    });
+
                 })
                 .catch(function(err) {
                     $scope.progress = false;
