@@ -1,37 +1,16 @@
 <div class="multiselect">
 
     <ul class="selected">
-        <li>Найдено <i class="fa fa-times"></i></li>
-        <li>ООО металлург <i class="fa fa-times"></i></li>
-        <li>металист <i class="fa fa-times"></i></li>
-        <li>кардио <i class="fa fa-times"></i></li>
-        <li>хрень <i class="fa fa-times"></i></li>
-        <li><i class="fa fa-user-plus"></i></li>
+        <li ng-repeat="e in values">{{get(e)}} <i class="fa fa-times" ng-click="remove(e)"></i></li>
+        <li ng-click="flip($event)"><i class="fa fa-user-plus"></i></li>
     </ul>
-    <div class="dropdown">
+
+    <div class="dropdown" ng-show="dropdown">
         <ul>
-            <li>asdasf</li>
-            <li>asdfasdfasdfasdfasdfadfasdfasdfasdfasdfasdfadfa</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
-            <li>asdfasdfasdfadsf</li>
+            <li class="list-header"><b>{{placeholder}}</b></li>
+            <li ng-if="flt().length" ng-repeat="e in flt()" ng-click="set($event, e)">{{get(e._id)}}</li>
+            <li ng-if="!flt().length"><i>Список пуст.</i></li>
         </ul>
     </div>
-
 
 </div>

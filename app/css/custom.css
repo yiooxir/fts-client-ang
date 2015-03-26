@@ -74,13 +74,13 @@
 }
 
 .multiselect div.dropdown {
-    display: none;
     max-height: 180px;
     overflow-y: auto;
     position: absolute;
     background: white;
     z-index: 999;
-    border: 1px solid gainsboro;
+    border: 1px solid #a9a9a9;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
     width: 100%;
 }
 
@@ -90,4 +90,16 @@
 }
 .multiselect .dropdown li:hover {
     background: lightgrey;
+}
+.multiselect .dropdown li.list-header:hover {
+    background: none;
+    cursor: default;
+}
+
+.multiselect .dropdown select {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
 }

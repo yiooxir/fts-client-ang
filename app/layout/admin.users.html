@@ -51,7 +51,7 @@
             <td><field-input object='user' field="contractor" options="options"></field-input></td>
             <td>
                 <!--<field-firms user="user"></field-firms>-->
-                <field-multi-select></field-multi-select>
+                <field-multi-select select="firms" values="user.firms" display="name"></field-multi-select>
             </td>
             <td><field-date object="user" options="options" field="created"></field-date></td>
             <td class="management">
