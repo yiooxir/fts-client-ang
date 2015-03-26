@@ -19,7 +19,15 @@ module.exports = function($timeout, $parse) {
 
             return function($scope, $element) {
 
-                $scope.value = $scope.object[$scope.field];
+                Object.defineProperty($scope, 'value', {
+                   get: function() {
+                       return this.object[$scope.field];
+                   },
+                    set: function(value) {
+                       this.object[$scope.field]=value;
+                    }
+                });
+
                 $scope.editMode = false;
                 $element = $($element);
 

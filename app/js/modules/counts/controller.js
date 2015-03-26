@@ -7,7 +7,6 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
 
     $scope.firms = $scope.$parent.firms;
     $scope.counts = $scope.$parent.counts;
-    console.log($scope.counts)
     $scope.firm = $stateParams.id ? _.findWhere($scope.firms, {_id: $stateParams.id}) : null;
     $scope.creating = false;
     $scope.updating = false;
@@ -50,9 +49,7 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
             createdBy: $rootScope.locals.user._id
         })
             .then(function(res) {
-                $timeout(function() {$scope.counts.unshift(res)})
-
-                //$state.go($state.current, $stateParams, {reload: true})
+                $timeout(function() {$scope.counts.unshift(res)});
             })
             .catch(function(err) {
                 $scope.progress = false;
