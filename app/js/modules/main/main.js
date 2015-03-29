@@ -4,7 +4,7 @@
 
 var api = require('../../services/api');
 
-module.exports = function($scope, $rootScope, firms, counts, users, $state, quarter) {
+module.exports = function($scope, $rootScope, firms, counts, users, $state) {
     console.info('main controller is started');
 
     $scope.firms = firms;

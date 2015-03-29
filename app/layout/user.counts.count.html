@@ -25,7 +25,7 @@
 
                     <select class="form-control" ng-model = 'contractor'
                             ng-options="c as c for c in getContractors()"> выберите фирму
-                            <!--ng-options="firm as firm.name for firm in firms"> выберите фирму-->
+                        <!--ng-options="firm as firm.name for firm in firms"> выберите фирму-->
                     </select>
 
                     <button type="button" class="btn btn-default" ng-click="create()">Создать <i class="fa-li fa fa-spinner fa-spin" style="position: inherit" ng-show="progress"></i></button>
@@ -68,11 +68,17 @@
         <tr ng-repeat="count in filtered() | filter: {firm: firm._id} | orderBy: 'sysNumber'">
             <td>{{$index+1}}</td>
             <td>{{count.contractor}}</td>
-            <td><field-date object="count" field="created" options="options"></field-date></td>
+            <td>
+                <span ng-if="!count.sysNumber"><field-date object="count" field="created" options="options"></field-date></span>
+                <span ng-if="count.sysNumber">{{count.created|date:'dd.MM.yyyy'}}</span>
+
+            </td>
             <td><field-input object="count" field="amount" options="options"></field-input></td>
             <td>{{count.sysNumber || 'нет номера'}}</td>
             <td>
-                <a href="" ng-click="remove(count)" ng-if="!count.sysNumber"><i class="fa fa-times"></i></a>
+                <span ng-if="!count.sysNumber">
+                    <a href="" ng-click="remove(count)"><i class="fa fa-times"></i></a>
+                </span>
             </td>
         </tr>
     </table>
