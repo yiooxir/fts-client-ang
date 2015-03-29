@@ -22,6 +22,7 @@ require('./modules/auth');
 require('./modules/test');
 require('./modules/admin');
 require('./directives');
+require('./services');
 
 
 app.config(function($stateProvider, $urlRouterProvider) {

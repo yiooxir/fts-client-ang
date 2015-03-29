@@ -17,7 +17,6 @@
 <table class="table table-hover">
     <tr>
         <th>#</th>
-        <th>№ оферты</th>
         <th>Дата</th>
         <th>Сумма</th>
         <th>Контрагенты</th>
@@ -26,7 +25,6 @@
     </tr>
     <tr ng-repeat="count in counts | orderBy : 'contractor' | fltRecByUser:filters.user | fltRecByFirm: filters.firm">
         <td>{{$index}}</td>
-        <td>{{count.systemNum}}</td>
         <td><field-date object="count" field="created" options="options"></field-date></td>
         <td><field-input object="count" field="amount" options="options"></field-input></td>
         <td>{{count.contractor}}
