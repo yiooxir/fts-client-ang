@@ -29,7 +29,9 @@
         <td>{{count.systemNum}}</td>
         <td><field-date object="count" field="created" options="options"></field-date></td>
         <td><field-input object="count" field="amount" options="options"></field-input></td>
-        <td>{{count.contractor}} <mark style="color: #808080; font-size: 0.8em;">{{getUser(count.createdBy).username}}</mark></td>
+        <td>{{count.contractor}}
+            <a href="" ng-click="filters.user=getUser(count.createdBy)" ui-sref="main.admin.users"><mark style="color: #808080; font-size: 0.8em;">{{getUser(count.createdBy).username}}</mark></a>
+        </td>
         <td>{{count.sysNumber}}</td>
         <td><a href="" ng-click="remove(count)"><i class="fa fa-times"></i></a></td>
     </tr>
