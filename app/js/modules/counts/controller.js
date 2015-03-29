@@ -14,10 +14,10 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
     $scope.progress = false;
     $scope.amount = '';
     $scope.closed = false;
-    $scope.contractor = '123123';
+    $scope.contractor = '';
 
     $scope.getContractors = function() {
-        return $rootScope.locals.user.contractor;
+        return $rootScope.locals.user.contractor.split(';');
     };
 
 
@@ -51,7 +51,8 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
             amount: $scope.amount || 0,
             firm: $scope.firm._id,
             created: $scope.dateNow.created,
-            createdBy: $rootScope.locals.user._id
+            createdBy: $rootScope.locals.user._id,
+            contractor: $scope.contractor
         })
             .then(function(res) {
                 $timeout(function() {

@@ -9,7 +9,7 @@
             <button type="button" class="btn btn-default" ng-click="creating = true" > Добавить фактуру </button>
         </div>
 
-        <div class="col-md-6"  ng-show="creating">
+        <div class="col-md-8"  ng-show="creating">
             <div>
 
                 <form class="form-inline">
@@ -23,8 +23,8 @@
                         </div>
                     </div>
 
-                    <select class="form-control" ng-model = 'contractor'>
-                            <!--ng-options="firm as firm.name for firm in firms"> выберите фирму-->
+                    <select class="form-control" ng-model = 'contractor'
+                            ng-options="c as c for c in getContractors()"> выберите фирму
                             <!--ng-options="firm as firm.name for firm in firms"> выберите фирму-->
                     </select>
 
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="row">{{getContractors()}}</div>
+        <!--<div class="row">{{getContractors()}}</div>-->
 
         <div class="col-md-3">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -67,7 +67,7 @@
         </tr>
         <tr ng-repeat="count in filtered() | filter: {firm: firm._id} | orderBy: 'sysNumber'">
             <td>{{$index+1}}</td>
-            <td>{{locals.user.contractor}}</td>
+            <td>{{count.contractor}}</td>
             <td><field-date object="count" field="created" options="options"></field-date></td>
             <td><field-input object="count" field="amount" options="options"></field-input></td>
             <td>{{count.sysNumber || 'нет номера'}}</td>
