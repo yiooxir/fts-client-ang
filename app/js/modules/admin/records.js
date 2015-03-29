@@ -5,12 +5,13 @@
 var utils = require('../../utils');
 var api = require('../../services/api');
 
-module.exports = function($scope, $timeout) {
+module.exports = function($scope, $timeout, quarter) {
 
     $scope.firms = $scope.$parent.firms;
     $scope.users = $scope.$parent.users;
     $scope.counts = $scope.$parent.counts;
     $scope.filters = $scope.$parent.filters;
+    $scope.quarter = quarter;
 
     $scope.options = {
         onChange: function(params) {

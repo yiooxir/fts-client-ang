@@ -27,13 +27,10 @@ module.exports = function($rootScope) {
     var curQuarter = quarters[curQuarterInd];
 
     return {
-        byNumber: function(rec) {
-            //if (_.has(rec.created) && rec.)
-        },
-        byQuarter: function(rec) {
+        protected: function(rec) {
             if (_.has(rec.created))throw new Error('bad data');
 
-            return rec.created < curQuarter;
+            return new Date(rec.created) < curQuarter;
         }
     }
 };
