@@ -14,7 +14,11 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
     $scope.progress = false;
     $scope.amount = '';
     $scope.closed = false;
+    $scope.contractor = '123123';
 
+    $scope.getContractors = function() {
+        return $rootScope.locals.user.contractor;
+    };
 
 
     $scope.options = {
@@ -23,7 +27,8 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
 
             api.updateCount(params.object._id, params.hash)
                 .then(function() {
-                    $state.go($state.current, $stateParams, {reload: true})
+                    $timeout(function() {});
+                    //$state.go($state.current, $stateParams, {reload: true})
                 })
                 .catch(function(err) {
                     alert('Ошибка при изменении значения поля');
@@ -34,10 +39,10 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
 
     $scope.filtered = function() {
         if ($scope.closed) {
-            return _.filter($scope.counts, function(count) {return count.sysNumber > 0})
+            return _.filter($scope.counts, function(count) {return count.sysNumber != null})
         }
         else {
-            return _.filter($scope.counts, function(count) {return !count.hasOwnProperty('sysNumber')})
+            return _.filter($scope.counts, function(count) {return count.sysNumber === null})
         }
     };
 
@@ -49,7 +54,10 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
             createdBy: $rootScope.locals.user._id
         })
             .then(function(res) {
-                $timeout(function() {$scope.counts.unshift(res)});
+                $timeout(function() {
+                    $scope.counts.unshift(res);
+                    $scope.closed = false;
+                });
             })
             .catch(function(err) {
                 $scope.progress = false;

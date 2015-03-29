@@ -25,5 +25,13 @@ module.exports = {
             .catch(function(err) {
                 console.error(err);
             })
+    },
+    user: function($rootScope) {
+        return api.getMe()
+            .then(function(res) {
+                $rootScope.locals.user = res;
+                $rootScope.isSuperUser = function() {return res.isSuperUser}
+            })
     }
+
 };

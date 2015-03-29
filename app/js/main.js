@@ -17,6 +17,7 @@ var app = angular.module('app', ['ui.router']);
 /* angular modules */
 require('./modules/main');
 require('./modules/counts');
+require('./modules/contractors');
 require('./modules/auth');
 require('./modules/test');
 require('./modules/admin');
@@ -91,6 +92,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'userCounts'
         })
 
+        .state('main.contractors', {
+            url: '/contractors',
+            templateUrl: '/layout/user.contractors.html',
+            controller: 'userContractors'
+        })
+
         .state('main.counts.count', {
             url: '/:id',
             templateUrl: '/layout/user.counts.count.html',
@@ -120,16 +127,20 @@ app.run(function($rootScope, $state, $timeout) {
 
     $rootScope.locals = {};
     var locals = $rootScope.locals;
-
+    //
     locals.user = null;
-
-    $rootScope.getUserName = function() {
-        return locals.user ? locals.user.username : null;
-    };
-
-    $rootScope.isSuperUser = function() {
-        return locals.user ? locals.user.isSuperUser : null;
-    };
+    //
+    //$rootScope.getUser = function() {
+    //    return locals.user;
+    //};
+    //
+    //$rootScope.getUserName = function() {
+    //    return locals.user ? locals.user.username : null;
+    //};
+    //
+    //$rootScope.isSuperUser = function() {
+    //    return locals.user ? locals.user.isSuperUser : null;
+    //};
 
     /* check auth. middleware */
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {

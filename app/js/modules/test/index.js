@@ -8,7 +8,7 @@ var api = require('../../services/api');
 
 module.exports = app.controller('test', function($rootScope, $scope, $timeout) {
 
-    $scope.username = $rootScope.locals.getUserName();
+    $scope.username = $rootScope.locals.user.username;
 
     $scope.logout = function() {
         api.logout()

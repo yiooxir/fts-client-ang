@@ -1,0 +1,15 @@
+<div class="row">
+    <h2>Редактирование контрагентов</h2>
+    <p>Все введенные контрагенты будут привязаны к текущему аккаунту</p>
+    <p>Для добавления нового контрагента введите новую запись через разделительный знак <b>;</b> без пробелов.</p>
+    <p>В конце разделительный знак ставить не надо.</p>
+    <p>Пример: <code>ООО "Рога и копыта";ИП Иванов ИИ;ОАО "Система" </code></p>
+</div>
+
+<div class="row">
+
+    <textarea name="cotractors" rows="5" style="width: 100%"
+               ng-model="locals.user.contractor" ng-keydown="editMode = true"></textarea>
+
+    <button class="btn btn-default" type="button" ng-click="update()" ng-show="editMode">Сохранить</button>
+</div>

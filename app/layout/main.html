@@ -15,12 +15,13 @@
                             </li>
                         </ul>
                     </li>
+                    <li><a href="" ui-sref="main.contractors" ng-if="locals.user && !isSuperUser()">Контрагенты</a></li>
                     <li><a href="" ui-sref="main.admin.users" ng-if="locals.user && isSuperUser()">Администрирование</a></li>
                     <li><a href="" ui-sref="main.about">О программе</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="navbar-text"> <span class="text-info">{{getUserName()}}</span> </li>
+                    <li class="navbar-text"> <span class="text-info">{{locals.user.username}}</span> </li>
                     <li><a href="" ng-click="logout()">выход</a></li>
                 </ul>
             </div>

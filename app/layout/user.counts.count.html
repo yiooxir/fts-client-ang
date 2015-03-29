@@ -22,11 +22,19 @@
                             </div>
                         </div>
                     </div>
+
+                    <select class="form-control" ng-model = 'contractor'>
+                            <!--ng-options="firm as firm.name for firm in firms"> выберите фирму-->
+                            <!--ng-options="firm as firm.name for firm in firms"> выберите фирму-->
+                    </select>
+
                     <button type="button" class="btn btn-default" ng-click="create()">Создать <i class="fa-li fa fa-spinner fa-spin" style="position: inherit" ng-show="progress"></i></button>
                     <button type="button" class="btn btn-default" ng-click="creating=false">Отмена</button>
                 </form>
             </div>
         </div>
+
+        <div class="row">{{getContractors()}}</div>
 
         <div class="col-md-3">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -48,7 +56,6 @@
 
     </div>
 
-
     <table class="table table-condensed">
         <tr>
             <th style="min-width: 30px;">#</th>
@@ -58,7 +65,7 @@
             <th style="min-width: 250px;">№ оферты</th>
             <th style="min-width: 250px;">Управление</th>
         </tr>
-        <tr ng-repeat="count in filtered() | filter: {firm: firm._id}">
+        <tr ng-repeat="count in filtered() | filter: {firm: firm._id} | orderBy: 'sysNumber'">
             <td>{{$index+1}}</td>
             <td>{{locals.user.contractor}}</td>
             <td><field-date object="count" field="created" options="options"></field-date></td>
