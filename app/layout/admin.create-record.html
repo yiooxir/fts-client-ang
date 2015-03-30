@@ -1,0 +1,77 @@
+<h2>Форма добавления фактуры</h2>
+<p>В данном разделе можно создать фактуру от имени любого существующего пользователя.</p>
+<p>Для добавления фактуры выберите дату, сумму. Также необходимо выбрать аккаунт пользователя и контрагента.</p>
+<p>Если вы желаете добавить фактуру к фиктивному пользователю, кликните по значку <i class="fa fa-user-plus"></i>
+При этом вместо поля выбора существующего аккаунта будет доступно поле ввода нового контрагента.&shy;
+В таком случае в системе будет создан новый фиктивный контрагент. &shy;Никаких уведомлений на почту такой пользователь не получит.</p>
+
+
+<div class="create-invoice">
+
+    <!-- Параметры оферты -->
+    <div class="row">
+        <div class="col-md-4">
+            <label for="invoice">Введите параметры оферты:</label>
+            <div class="input-group">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Руб.</button>
+          </span>
+                <input type="text" class="form-control" placeholder="Сумма" id="invoice" ng-model="countTemplate.amount">
+             <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+                <field-date object="countTemplate" field="created"></field-date>
+            </button>
+          </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- фирма -->
+    <div class="row" >
+        <div class="col-md-4">
+            <label for="firm">Выберите фирму:</label>
+            <select ng-model="firm" class="form-control" id="firm"
+                    ng-options="firm as firm.name for firm in firms">
+            </select>
+        </div>
+    </div>
+
+    <!-- Акк и контрагент -->
+    <div ng-show="!newAcc">
+        <div class="row" >
+            <div class="col-md-4">
+                <label for="user">Выберите аккаунт или создайте фиктивный:
+                    <a href="" ng-click="newAcc = true"><i class="fa fa-user-plus"></i></a>
+                </label>
+                <select ng-model="user" class="form-control" id="user"
+                        ng-options="user as user.username for user in users"> аккаунт
+                </select>
+            </div>
+        </div>
+
+        <div class="row" >
+            <div class="col-md-4" ng-show="user">
+                <label for="contractor">Выберите контрагента:</label>
+                <select ng-model="contractor" class="form-control" id="contractor"
+                        ng-options="cnt as cnt for cnt in getContractors()"> контрагент
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Новый акк. -->
+    <div class="row" ng-show="newAcc">
+        <div class="col-md-4">
+            <label for="accName">Введите имя фиктивного аккаунта:</label>
+            <input type="text" class="form-control" id="accName" ng-model="accName"/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary" ng-click="create()">Создать</button>
+        </div>
+    </div>
+
+</div>

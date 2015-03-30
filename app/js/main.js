@@ -86,6 +86,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
             resolve: require('./modules/admin/createToken.resolve.js')
         })
 
+        .state('main.admin.createRecord', {
+            url: '/createRecord',
+            templateUrl: '/layout/admin.create-record.html',
+            controller: 'adminCreateRecord'
+        })
+
         /* users */
         .state('main.counts', {
             url: '/counts',

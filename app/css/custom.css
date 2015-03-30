@@ -103,3 +103,7 @@
     position: absolute;
     z-index: 0;
 }
+
+.create-invoice .col-md-4 {
+    margin: 7px 0;
+}
