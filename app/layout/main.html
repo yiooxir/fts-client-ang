@@ -21,7 +21,11 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="navbar-text"> <span class="text-info">{{locals.user.username}}</span> </li>
+                    <li class="navbar-text" ng-if="!locals.user.isSuperUser"><span>{{locals.user.username}}</span></li>
+                    <li ng-if="locals.user.isSuperUser">
+                        <a href="" ui-sref="main.changePassword"><span class="text-info">{{locals.user.username}}</span></a>
+                    </li>
+
                     <li><a href="" ng-click="logout()">выход</a></li>
                 </ul>
             </div>

@@ -92,6 +92,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controller: 'adminCreateRecord'
         })
 
+        .state('main.changePassword', {
+            url: '/changePassword',
+            templateUrl: '/layout/admin.change-password.html',
+            controller: 'adminChangePassword'
+        })
+
         /* users */
         .state('main.counts', {
             url: '/counts',

@@ -10,6 +10,7 @@ app.controller('adminUsers', require('./users'));
 app.controller('adminFirms', require('./firms'));
 app.controller('adminCreateToken', require('./createUserToken'));
 app.controller('adminCreateRecord', require('./createRecord'));
+app.controller('adminChangePassword', require('./changePassword'));
 
 app.filter('fltRecByUser', require('./filters').fltRecByUser);
 app.filter('fltRecByFirm', require('./filters').fltRecByFirm);
