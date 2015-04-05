@@ -46,12 +46,15 @@ module.exports = function($timeout, $parse) {
             }
 
             $scope.change = function() {
+                $scope.object[$scope.field] = $scope.value;
+
                 options.onChange({
                     affectedField: $scope.field,
                     object: $scope.object,
                     value: $scope.value,
                     hash: (function() {var v = {}; v[$scope.field] = $scope.value; return v})()
                 });
+
                 exitEditMode();
             };
 

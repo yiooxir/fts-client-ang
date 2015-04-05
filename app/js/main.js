@@ -23,6 +23,7 @@ require('./modules/test');
 require('./modules/admin');
 require('./directives');
 require('./services');
+require('./filters');
 
 
 app.config(function($stateProvider, $urlRouterProvider) {

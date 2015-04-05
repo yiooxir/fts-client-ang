@@ -15,11 +15,13 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
     $scope.amount = '';
     $scope.closed = false;
     $scope.contractor = '';
+    $scope.filterDate = {
+        date: new Date()
+    };
 
     $scope.getContractors = function() {
         return $rootScope.locals.user.contractor.split(';');
     };
-
 
     $scope.options = {
         onChange: function(params) {
@@ -27,22 +29,12 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
 
             api.updateCount(params.object._id, params.hash)
                 .then(function() {
-                    $timeout(function() {});
-                    //$state.go($state.current, $stateParams, {reload: true})
+                    $timeout(function() {/* angular update scope */});
                 })
                 .catch(function(err) {
                     alert('Ошибка при изменении значения поля');
                     console.error(err);
                 })
-        }
-    };
-
-    $scope.filtered = function() {
-        if ($scope.closed) {
-            return _.filter($scope.counts, function(count) {return count.sysNumber != null})
-        }
-        else {
-            return _.filter($scope.counts, function(count) {return count.sysNumber === null})
         }
     };
 
@@ -58,6 +50,8 @@ module.exports = function($scope, $stateParams, $rootScope, $state, $timeout) {
                 $timeout(function() {
                     $scope.counts.unshift(res);
                     $scope.closed = false;
+                    $scope.progress = false;
+                    $scope.creating = false;
                 });
             })
             .catch(function(err) {

@@ -1,15 +1,28 @@
-<!--suppress HtmlFormInputWithoutLabel -->
-<!--<div class="row" style="margin: 10px">-->
-    <!--<div class="col-md-3" >-->
-        <!--<div class="input-group">-->
-            <!--<span class="input-group-addon">поиск</span>-->
-            <!--<input type="text" class="form-control" id="inputGroupSuccess3" aria-describedby="inputGroupSuccess3Status">-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
 <div class="row">
     <h3>Фактуры пользователей. </h3>
 </div>
+<div class="row" style="margin-bottom: 10px;">
+    <!-- блок управления отображением: с номером / без номера -->
+    <div class="col-md-3">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group" aria-label="First group">
+                <button type="button" class="btn btn-default"
+                        ng-click="closed=true" ng-class="{active:closed}"
+                        title="показать оферты с номером">
+                    <i class="fa fa-lock"></i></button>
+                <button class="btn btn-toolbar" ng-show="closed">
+                    <field-date object="filterDate" field="date" view-mode="1" mask="MMMM yyyy"></field-date>
+                </button>
+                <button type="button" class="btn btn-default"
+                        ng-click="closed=false" ng-class="{active:!closed}"
+                        title="показать оферты без номера">
+                    <i class="fa fa-unlock"></i></button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <remove-filter></remove-filter>
 </div>
@@ -23,7 +36,7 @@
         <th>№СФ</th>
         <th>Управление</th>
     </tr>
-    <tr ng-repeat="count in counts | orderBy : 'contractor' | fltRecByUser:filters.user | fltRecByFirm: filters.firm">
+    <tr ng-repeat="count in counts  | closed:closed | month:filterDate.date:closed | fltRecByUser:filters.user | fltRecByFirm: filters.firm | orderBy : 'contractor'">
         <td>{{$index}}</td>
         <td>
             <span ng-if="!quarter.protected(count)"><field-date object="count" field="created" options="options"></field-date></span>

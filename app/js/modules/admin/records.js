@@ -12,7 +12,8 @@ module.exports = function($scope, $timeout, quarter) {
     $scope.counts = $scope.$parent.counts;
     $scope.filters = $scope.$parent.filters;
     $scope.quarter = quarter;
-
+    $scope.closed = false;
+    $scope.filterDate = { date: new Date() };
     $scope.options = {
         onChange: function(params) {
             if (!params.value) return alert('Ошибка. Нельзя сохранять пустое значение');

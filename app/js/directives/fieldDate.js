@@ -12,7 +12,10 @@ module.exports = function($timeout, $parse) {
         templateUrl: "/layout/component.field-date.html",
         scope: {
             object: '=',
-            field: '@'
+            field: '@',
+            /* 0 -date; 1 -month */
+            viewMode: '@',
+            mask: '@'
         },
 
         compile: function($element, $attr) {
@@ -29,6 +32,8 @@ module.exports = function($timeout, $parse) {
                 });
 
                 $scope.editMode = false;
+                $scope.viewMode = $scope.viewMode || '0';
+                $scope.mask = $scope.mask || 'dd.MM.yyyy';
                 $element = $($element);
 
                 var get = $parse($attr.options);
@@ -43,7 +48,8 @@ module.exports = function($timeout, $parse) {
                     startView: 0,
                     language: "ru",
                     todayHighlight: true,
-                    autoclose: true
+                    autoclose: true,
+                    minViewMode: $scope.viewMode - 0
                 })
                     .on('changeDate', function(e){
                         $timeout(function() {
