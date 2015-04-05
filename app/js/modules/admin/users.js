@@ -39,6 +39,23 @@ module.exports = function($scope, users, $state, $timeout) {
             })
     };
 
+    $scope.changeUserPassword = function(user) {
+        var newPass = Math.round(Math.random()*1000*1000);
+        var e = confirm('Пароль пользователя будет изменен. Новый пароль: ' + newPass);
+
+        if (e) {
+            api.updateUser(user._id, {
+                newPass: newPass+''
+            })
+                .then(function(res) {
+                    alert('Пароль для пользователя: '+res.username+' успешно изменен');
+                })
+                .catch(function(err) {
+                    alert('Сервеная ошибка. Пароль не изменен.');
+                })
+        }
+    };
+
     $scope.$on('fieldMultiSelect', function(e, data) {
         api.updateUser(data.id, {firms: data.values})
             .catch(function(err) {
